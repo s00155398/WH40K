@@ -1,1 +1,1 @@
-# WH40K This project contains a Third-Person setup in which currently contains an animated and retargeted Tau FireWarrior character which the player controls. Currently wholly in bluepring before conversion to cpp.
+# WH40K This  Unreal Engine project contains a Third-Person setup in which currently contains an animated and retargeted Tau FireWarrior character which the player controls. Currently wholly in bluepring before conversion to cpp.
