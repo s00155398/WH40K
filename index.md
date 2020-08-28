@@ -6,22 +6,24 @@
 
 ## Media
 
+[Tau FireWarrior AimOffset](https://www.youtube.com/watch?v=fo22MS3_BgI)
 
-https://www.youtube.com/watch?v=fo22MS3_BgI
 
 
 Currently the Fire Warrior has an Aim Offset implemented allowing it to rotate and follow the players view.
 
-https://www.youtube.com/embed/vzbeQnBh-lk
+
+
+[Tau FireWarrior Pulse Carbine](https://www.youtube.com/embed/vzbeQnBh-lk)
+
 
 
 The Fire Warrior has one weapon currently, the Tau Pulse Carbine. The standard armament for frontline Tau Infantry.
 It is very much WIP with further changes to be made to the firing rate, animations and interactions.
 
 ## Further Media
+[Space Marine Dreadnought Firing & Movement](https://www.youtube.com/embed/u8Nq3JJJQYM)
 
-https://www.youtube.com/embed/u8Nq3JJJQYM
+[Space Marine Dreadnought Flyby](https://www.youtube.com/embed/XF-2-xlHfeE)
 
-https://www.youtube.com/embed/XF-2-xlHfeE
-
-https://www.youtube.com/embed/qvmLaIHDQwk
+[Tau FireWarrior Flyby](https://www.youtube.com/embed/qvmLaIHDQwk)
