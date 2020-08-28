@@ -1,37 +1,29 @@
-## Welcome to GitHub Pages
+# WH40K
 
-You can use the [editor on GitHub](https://github.com/s00155398/WH40K/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+##Introduction
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+![](media/TauFWPIC1.png)
 
-### Markdown
+         This Unreal Engine4 project contains a player controlled third-person character. The character is fully animated and modelled as a Tau Fire-Warrior from the popular Sci-Fi franchise Warhammer 40k. It also contains a controllable Imperial Space Marine Dreadnought, which is mostly animated and developed. Also within the project is several Enemy NPC's with Base AI implementation such as patrol and chase behaviours in regard to the player character.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+##Media
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+https://www.youtube.com/watch?v=fo22MS3_BgI
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+Currently the Fire Warrior has an Aim Offset implemented allowing it to rotate and follow the players view.
 
-**Bold** and _Italic_ and `Code` text
+https://www.youtube.com/embed/vzbeQnBh-lk
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+The Fire Warrior has one weapon currently, the Tau Pulse Carbine. The standard armament for frontline Tau Infantry.
+It is very much WIP with further changes to be made to the firing rate, animations and interactions.
 
-### Jekyll Themes
+##Further Media
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/s00155398/WH40K/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+https://www.youtube.com/embed/u8Nq3JJJQYM
 
-### Support or Contact
+https://www.youtube.com/embed/XF-2-xlHfeE
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+https://www.youtube.com/embed/qvmLaIHDQwk
