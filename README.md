@@ -9,13 +9,13 @@
 https://www.youtube.com/watch?v=fo22MS3_BgI
 
 
-           Currently the Fire Warrior has an Aim Offset implemented allowing it to rotate and follow the players view.
+Currently the Fire Warrior has an Aim Offset implemented allowing it to rotate and follow the players view.
 
 https://www.youtube.com/embed/vzbeQnBh-lk
 
 
-           The Fire Warrior has one weapon currently, the Tau Pulse Carbine. The standard armament for frontline Tau Infantry.
-  It is very much WIP with further changes to be made to the firing rate, animations and interactions.
+The Fire Warrior has one weapon currently, the Tau Pulse Carbine. The standard armament for frontline Tau Infantry.
+It is very much WIP with further changes to be made to the firing rate, animations and interactions.
 
 ##Further Media
 
