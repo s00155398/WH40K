@@ -8,9 +8,11 @@
 
 [Tau FireWarrior AimOffset](https://www.youtube.com/watch?v=fo22MS3_BgI)
 
-
-
 Currently the Fire Warrior has an Aim Offset implemented allowing it to rotate and follow the players view.
+
+[Tau FireWarrior IK hand attachment](https://www.youtube.com/watch?v=AeFQHfd2CSk)
+
+IK Setup to allow the Firewarriors left hand to remain in the grip of the Pulse Carbine and for a realistic posuture to remain without any deformations of the limbs.
 
 
 
@@ -27,3 +29,5 @@ It is very much WIP with further changes to be made to the firing rate, animatio
 [Space Marine Dreadnought Flyby](https://www.youtube.com/embed/XF-2-xlHfeE)
 
 [Tau FireWarrior Flyby](https://www.youtube.com/embed/qvmLaIHDQwk)
+
+[Tau FireWarrior Aim Update](https://www.youtube.com/watch?v=bXMJD1GKWKI)
