@@ -33,3 +33,6 @@ It is very much WIP with further changes to be made to the firing rate, animatio
 [Tau FireWarrior Flyby](https://www.youtube.com/embed/qvmLaIHDQwk)
 
 [Tau FireWarrior Aim Update](https://www.youtube.com/watch?v=bXMJD1GKWKI)
+
+[Tau FireWarrior Click to Aim](https://www.youtube.com/watch?v=T9ZQTZroQl4)
+
