@@ -36,3 +36,5 @@ It is very much WIP with further changes to be made to the firing rate, animatio
 
 [Tau FireWarrior Click to Aim](https://www.youtube.com/watch?v=T9ZQTZroQl4)
 
+[Tau FireWarrior Enemy Interaction](https://www.youtube.com/watch?v=-QT0zYkL0tU&feature=youtu.be)
+
