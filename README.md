@@ -8,6 +8,14 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 ## Media
 
+[Firewarrior animation & aiming update](https://www.youtube.com/watch?v=InKMYaX0KO4&feature=youtu.be)
+
+The firewarrior is now using retargeted animations from the paragon assets available from the Unreal Store, Aiming has also been  tightened  up to allow for more accurate fire.
+
+[Tau FireWarrior Enemy Interaction](https://www.youtube.com/watch?v=-QT0zYkL0tU&feature=youtu.be)
+
+Showing the Ai enemies reacting to the player character and giving chase when the player is sighted.
+
 [Tau FireWarrior AimOffset](https://www.youtube.com/watch?v=fo22MS3_BgI)
 
 Currently the Fire Warrior has an Aim Offset implemented allowing it to rotate and follow the players view.
@@ -16,15 +24,6 @@ Currently the Fire Warrior has an Aim Offset implemented allowing it to rotate a
 
 IK Setup to allow the Firewarriors left hand to remain in the grip of the Pulse Carbine and for a realistic posuture to remain without any deformations of the limbs.
 
-
-
-[Tau FireWarrior Pulse Carbine](https://www.youtube.com/embed/vzbeQnBh-lk)
-
-
-
-The Fire Warrior has one weapon currently, the Tau Pulse Carbine. The standard armament for frontline Tau Infantry.
-It is very much WIP with further changes to be made to the firing rate, animations and interactions.
-
 ## Further Media
 [Space Marine Dreadnought Firing & Movement](https://www.youtube.com/embed/u8Nq3JJJQYM)
 
@@ -32,9 +31,9 @@ It is very much WIP with further changes to be made to the firing rate, animatio
 
 [Tau FireWarrior Flyby](https://www.youtube.com/embed/qvmLaIHDQwk)
 
-[Tau FireWarrior Aim Update](https://www.youtube.com/watch?v=bXMJD1GKWKI)
 
-[Tau FireWarrior Click to Aim](https://www.youtube.com/watch?v=T9ZQTZroQl4)
 
-[Tau FireWarrior Enemy Interaction](https://www.youtube.com/watch?v=-QT0zYkL0tU&feature=youtu.be)
+
+
+
 
