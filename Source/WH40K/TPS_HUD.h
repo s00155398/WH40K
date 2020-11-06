@@ -14,8 +14,7 @@ class WH40K_API ATPS_HUD : public AHUD
 {
 	GENERATED_BODY()
 protected:
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-		UTexture2D* CrosshairTexture;
+	
 
 public:
 	virtual void DrawHUD() override;
