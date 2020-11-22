@@ -3,6 +3,7 @@
 
 #include "FireWarrior_Character.h"
 #include "DrawDebugHelpers.h"
+#include "Engine\Classes\Components\AudioComponent.h"
 // Sets default values
 AFireWarrior_Character::AFireWarrior_Character()
 {
@@ -25,19 +26,44 @@ AFireWarrior_Character::AFireWarrior_Character()
 	BaseLookUpRate = 45.0f;
 
 
-	TimelineCurve = CreateDefaultSubobject<UCurveFloat>(FName("Aim Curve"));
-	TimelineCurve->FloatCurve.AddKey(0.0f,150.0f);
-	TimelineCurve->FloatCurve.AddKey(0.2f, 10.0f);
+	AimTimelineCurve = CreateDefaultSubobject<UCurveFloat>(FName("Aim Curve"));
+	AimTimelineCurve->FloatCurve.AddKey(0.0f,150.0f);
+	AimTimelineCurve->FloatCurve.AddKey(0.2f, 10.0f);
 
 	FOnTimelineFloat floatFunc{};
 	floatFunc.BindUFunction(this, "AimTimelineFunc");
 
-	AimTimeline.AddInterpFloat(TimelineCurve, floatFunc, FName("Aim function"));
+	AimTimeline.AddInterpFloat(AimTimelineCurve, floatFunc, FName("Aim function"));
 
 	ConstructorHelpers::FObjectFinder<UAnimMontage> anim(TEXT("AnimMontage'/Game/FireCaste/Animations/Fire_Short_Montage.Fire_Short_Montage'"));
 
-	
 	FireMontage = anim.Object;
+
+	IsOverHeating = false;
+
+	OverHeatTimelineCurve = CreateDefaultSubobject<UCurveFloat>(FName("OverHeat Curve"));
+	OverHeatTimelineCurve->FloatCurve.AddKey(0.0f, true);
+	OverHeatTimelineCurve->FloatCurve.AddKey(3.0f, false);
+
+	
+	floatFunc.BindUFunction(this, "OverHeatTimelineFunc");
+
+	OverHeatAimTimeline.AddInterpFloat(OverHeatTimelineCurve, floatFunc, FName("OverHeat function"));
+
+	static ConstructorHelpers::FObjectFinder<USoundCue> OverHeatCue(
+		TEXT("SoundCue'/Game/Audio/Plasma_Hiss_Cue.Plasma_Hiss_Cue'"));
+
+	OverheatAudioCue = OverHeatCue.Object;
+
+	OverheatAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("OverHeatAudioComp"));
+	OverheatAudioComponent->bAutoActivate = false;
+
+	OverheatAudioComponent->AttachTo(RootComponent);
+	OverheatAudioComponent->SetRelativeLocation(FVector(100.0f, 0.0f, 0.0f));
+
+	if (OverheatAudioCue->IsValidLowLevelFast()) {
+		OverheatAudioComponent->SetSound(OverheatAudioCue);
+	}
 }
 
 // Called when the game starts or when spawned
@@ -56,11 +82,35 @@ void AFireWarrior_Character::Tick(float DeltaTime)
 		AimTimeline.TickTimeline(DeltaTime);
 	}
 
-	if (CarbineHeat > 0)
+	if (OverHeatAimTimeline.IsPlaying())
 	{
-		CarbineHeat -= 0.1f;
+		OverHeatAimTimeline.TickTimeline(DeltaTime);
 	}
 
+	if (IsOverHeating)
+	{
+		CoolDownSpeed = 0.5f;
+	}
+	else
+	{
+		CoolDownSpeed = 0.1f;
+	}
+
+	if (CarbineHeat > 0)
+	{
+		CarbineHeat -= CoolDownSpeed;
+	}
+
+	if (CarbineHeat >= 100)
+	{
+		IsOverHeating = true;
+		OverheatAudioComponent->Play();
+	}
+
+	if (IsOverHeating == true && CarbineHeat <= 0)
+	{
+		IsOverHeating = false;
+	}
 }
 
 // Called to bind functionality to input
@@ -95,9 +145,18 @@ void AFireWarrior_Character::AimTimelineFunc(float BoomArmLength)
 	CameraBoom->TargetArmLength = BoomArmLength;
 }
 
+void AFireWarrior_Character::OverHeatTimelineFunc(float Duration)
+{
+	IsOverHeating = false;
+}
+
 void AFireWarrior_Character::Fire()
 {	
-	if (IsAiming == true)
+	if (CarbineHeat + 10 >= 100)
+	{
+		OverheatAudioComponent->Play();
+	}
+	if (IsAiming == true && IsOverHeating != true)
 	{
 		if (IsAttacking == true)
 		{
@@ -124,7 +183,8 @@ void AFireWarrior_Character::Fire()
 			}
 		}
 	}
-	if (CarbineHeat < 100 && (CarbineHeat + 10) < 100 && IsAiming)
+
+	if (IsOverHeating != true && IsAiming)
 	{
 		CarbineHeat += 10;
 	}

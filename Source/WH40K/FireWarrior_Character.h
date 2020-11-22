@@ -14,6 +14,7 @@
 #include "Components/ArrowComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "CarbineLaser.h"
+#include "Sound/SoundCue.h"
 #include "FireWarrior_Character.generated.h"
 
 UCLASS()
@@ -49,14 +50,23 @@ public:
 		bool IsAiming;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		bool IsFiring;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		float CoolDownSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Aiming")
-		UCurveFloat *TimelineCurve;
+		UCurveFloat *AimTimelineCurve;
 
 		FTimeline AimTimeline;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Aiming")
+			UCurveFloat* OverHeatTimelineCurve;
+
+	FTimeline OverHeatAimTimeline;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
 			float CarbineHeat = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
+		bool IsOverHeating;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 		UAnimMontage *FireMontage;
@@ -65,7 +75,8 @@ public:
 	ACarbineLaser *Laser;
 
 	
-	
+	USoundCue* OverheatAudioCue;
+	UAudioComponent* OverheatAudioComponent;
 
 	FVector StartLoc;
 
@@ -100,5 +111,6 @@ public:
 	void AimTimelineFunc(float BoomArmLength);
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void FireProjectile();
-
+	UFUNCTION()
+	void OverHeatTimelineFunc(float Duration);
 };
