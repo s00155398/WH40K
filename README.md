@@ -7,6 +7,11 @@
 This Unreal Engine4 project contains a player controlled third-person character. The character is fully animated and modelled as a Tau Fire-Warrior from the popular Sci-Fi franchise Warhammer 40k. It also contains a controllable Imperial Space Marine Dreadnought, which is mostly animated and developed. Also within the project is several Enemy NPC's with Base AI implementation such as patrol and chase behaviours in regard to the player character.
 
 ## Media
+
+[Firewarrior Particle System Update](https://youtu.be/fhVUdq7pqh4)
+
+Displaying the functionality of the overheating Carbine.
+
 [Firewarrior Particle System Update](https://www.youtube.com/watch?v=piyJGVVz_1g)
 
 Showcasing the newly added and changed particle systems used for the Carbine and its live ammunition.
