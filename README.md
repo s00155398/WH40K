@@ -8,7 +8,7 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 ## Media
 
-[Firewarrior Particle System Update](https://youtu.be/fhVUdq7pqh4)
+[Firewarrior Overheating Carbine Update](https://youtu.be/fhVUdq7pqh4)
 
 Displaying the functionality of the overheating Carbine.
 
