@@ -61,9 +61,12 @@ AFireWarrior_Character::AFireWarrior_Character()
 	OverheatAudioComponent->AttachTo(RootComponent);
 	OverheatAudioComponent->SetRelativeLocation(FVector(100.0f, 0.0f, 0.0f));
 
-	if (OverheatAudioCue->IsValidLowLevelFast()) {
+	if (OverheatAudioCue->IsValidLowLevelFast()) 
+	{
 		OverheatAudioComponent->SetSound(OverheatAudioCue);
 	}
+
+	FireMode = 1;
 }
 
 // Called when the game starts or when spawned
@@ -89,11 +92,11 @@ void AFireWarrior_Character::Tick(float DeltaTime)
 
 	if (IsOverHeating)
 	{
-		CoolDownSpeed = 0.5f;
+		CoolDownSpeed = 0.9f;
 	}
 	else
 	{
-		CoolDownSpeed = 0.1f;
+		CoolDownSpeed = 0.2f;
 	}
 
 	if (CarbineHeat > 0)
@@ -111,6 +114,7 @@ void AFireWarrior_Character::Tick(float DeltaTime)
 	{
 		IsOverHeating = false;
 	}
+
 }
 
 // Called to bind functionality to input
@@ -121,7 +125,10 @@ void AFireWarrior_Character::SetupPlayerInputComponent(UInputComponent* PlayerIn
 	InputComponent->BindAction("Aim", IE_Pressed, this, &AFireWarrior_Character::Aim);
 	InputComponent->BindAction("Aim", IE_Released, this, &AFireWarrior_Character::Aimout);
 
-	InputComponent->BindAction("Fire", IE_Pressed, this, &AFireWarrior_Character::Fire);
+	InputComponent->BindAction("Fire", IE_Pressed, this, &AFireWarrior_Character::CheckFire);
+	InputComponent->BindAction("Fire", IE_Released, this, &AFireWarrior_Character::StopFire);
+
+	InputComponent->BindAction("ChangeFiringMode", IE_Pressed, this, &AFireWarrior_Character::ChangeFireMode);
 }
 
 void AFireWarrior_Character::Aim()
@@ -130,7 +137,6 @@ void AFireWarrior_Character::Aim()
 	bUseControllerRotationYaw = true;
 
 	AimTimeline.PlayFromStart();
-
 }
 
 void AFireWarrior_Character::Aimout()
@@ -169,13 +175,11 @@ void AFireWarrior_Character::Fire()
 			switch (AttackCount)
 			{
 			case 0:
-			
 				AttackCount = 1;
 				PlayAnimMontage(FireMontage,1.0f);
 				FireProjectile();
 				break;
 			case 1:
-				
 				AttackCount = 0;
 				PlayAnimMontage(FireMontage, 1.0f);
 				FireProjectile();
@@ -186,8 +190,13 @@ void AFireWarrior_Character::Fire()
 
 	if (IsOverHeating != true && IsAiming)
 	{
-		CarbineHeat += 10;
+		CarbineHeat += 6;
 	}
+}
+
+void AFireWarrior_Character::StopFire()
+{
+	GetWorldTimerManager().ClearTimer(FireTimerHandle);
 }
 
 void AFireWarrior_Character::ResetCombo()
@@ -219,6 +228,29 @@ void AFireWarrior_Character::ComboAttackSave()
 	}
 }
 
+void AFireWarrior_Character::ChangeFireMode()
+{
+	switch (FireMode) {
+	case 0:
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Fire Mode 1"));
+		FireMode = 1;
+		break;
+	case 1:
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Fire Mode 0"));
+		FireMode = 0;
+		break;
+	}
+}
 
+void AFireWarrior_Character::CheckFire()
+{
+	if (FireMode == 1) {
+		GetWorldTimerManager().SetTimer(FireTimerHandle, this, &AFireWarrior_Character::Fire, 0.15f, true, 0.01f);
+	}
+	else 
+	{
+		Fire();
+	}
+}
 
 

@@ -59,12 +59,12 @@ public:
 		FTimeline AimTimeline;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Aiming")
-			UCurveFloat* OverHeatTimelineCurve;
+		UCurveFloat* OverHeatTimelineCurve;
 
 	FTimeline OverHeatAimTimeline;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
-			float CarbineHeat = 0;
+		float CarbineHeat = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
 		bool IsOverHeating;
 
@@ -72,7 +72,7 @@ public:
 		UAnimMontage *FireMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
-	ACarbineLaser *Laser;
+		ACarbineLaser *Laser;
 
 	
 	USoundCue* OverheatAudioCue;
@@ -82,7 +82,10 @@ public:
 
 	FRotator StartRot;
 
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
+		int FireMode;
+
+	FTimerHandle FireTimerHandle;
 
 protected:
 	// Called when the game starts or when spawned
@@ -102,15 +105,20 @@ public:
 	void Aimout();
 	UFUNCTION()
 	void Fire();
+	UFUNCTION()
+	void StopFire();
 	UFUNCTION(BlueprintCallable)
 	void ResetCombo();
 	UFUNCTION(BlueprintCallable)
 	void ComboAttackSave();
-	//Timeline Function
 	UFUNCTION()
 	void AimTimelineFunc(float BoomArmLength);
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void FireProjectile();
 	UFUNCTION()
 	void OverHeatTimelineFunc(float Duration);
+	UFUNCTION()
+	void ChangeFireMode();
+	UFUNCTION()
+	void CheckFire();
 };
