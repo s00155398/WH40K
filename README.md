@@ -9,7 +9,7 @@ This Unreal Engine4 project contains a player controlled third-person character.
 ## Updates
 [Ork Detection and Reaction Update](https://youtu.be/YhSjkPKuPbk0)
 
-The ork character now has some basic awareness which includes Patrolling, Detection and Attacking behaviours. Camera shakes added to player being hit and firing their weapon respectively. 
+The ork character now has some basic awareness which includes Patrolling, Detection and Attacking behaviours. Camera shakes added to player being hit and firing their weapon respectively. As well as hit reaction animations added to both the player character and the ork character.
 
 [Ork Update](https://youtu.be/pqNLTIfLGpw0)
 
