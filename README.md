@@ -8,7 +8,7 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 ## Updates
 
-[Ork Disintegration Update](https://www.youtube.com/watch?v=gkb0GdK123I&feature=youtu.be)
+[Ork Disintegration Update](https://youtu.be/d9TjetxjR7U)
 
 The Ork character now upon death has a chance to disintegrate.
 
