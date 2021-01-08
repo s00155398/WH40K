@@ -67,6 +67,15 @@ AFireWarrior_Character::AFireWarrior_Character()
 	}
 
 	FireMode = 1;
+
+	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimOne(TEXT("AnimMontage'/Game/tAU/Animations/Hit_React_1_Montage.Hit_React_1_Montage'"));
+	HitMontageOne = HitAnimOne.Object;
+	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimTwo(TEXT("AnimMontage'/Game/tAU/Animations/Hit_React_2_Montage.Hit_React_2_Montage'"));
+	HitMontageTwo = HitAnimTwo.Object;
+	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimThree(TEXT("AnimMontage'/Game/tAU/Animations/Hit_React_3_Montage.Hit_React_3_Montage'"));
+	HitMontageThree = HitAnimThree.Object;
+	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimFour(TEXT("AnimMontage'/Game/tAU/Animations/Hit_React_4_Montage.Hit_React_4_Montage'"));
+	HitMontageFour = HitAnimFour.Object;
 }
 
 // Called when the game starts or when spawned
@@ -253,4 +262,28 @@ void AFireWarrior_Character::CheckFire()
 	}
 }
 
+void AFireWarrior_Character::HitByChoppa()
+{
+	if (!IsAttacking)
+	{
+		HitCount = FMath::RandRange(0, 3);
+		switch (HitCount)
+		{
+		case 0:
+			PlayAnimMontage(HitMontageOne, 1.0f);
+		break;
+		case 1:
+			PlayAnimMontage(HitMontageTwo, 1.0f);
+			break;
+		case 2:
+			PlayAnimMontage(HitMontageThree, 1.0f);
+			break;
+		case 3:
+			PlayAnimMontage(HitMontageFour, 1.0f);
+			break;
+		}
+
+	}
+	InitiateCameraShake();	
+}
 

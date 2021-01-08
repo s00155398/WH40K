@@ -68,12 +68,23 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
 		bool IsOverHeating;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
+		ACarbineLaser* Laser;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 		UAnimMontage *FireMontage;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
-		ACarbineLaser *Laser;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+		UAnimMontage* HitMontageOne;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+		UAnimMontage* HitMontageTwo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+		UAnimMontage* HitMontageThree;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+		UAnimMontage* HitMontageFour;
 	
 	USoundCue* OverheatAudioCue;
 	UAudioComponent* OverheatAudioComponent;
@@ -86,6 +97,9 @@ public:
 		int FireMode;
 
 	FTimerHandle FireTimerHandle;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		int HitCount;
 
 protected:
 	// Called when the game starts or when spawned
@@ -121,4 +135,8 @@ public:
 	void ChangeFireMode();
 	UFUNCTION()
 	void CheckFire();
+	UFUNCTION()
+	void HitByChoppa();
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+		void InitiateCameraShake();
 };
