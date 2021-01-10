@@ -86,6 +86,7 @@ public:
 		void HitByProjectile();
 	UFUNCTION()
 		void UpdateHealth();
-	UFUNCTION()
-		void Disintegration();
+	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable)
+		void InitiateDisintegration();
+	
 };

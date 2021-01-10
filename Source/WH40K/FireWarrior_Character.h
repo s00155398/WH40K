@@ -138,5 +138,5 @@ public:
 	UFUNCTION()
 	void HitByChoppa();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-		void InitiateCameraShake();
+	void InitiateCameraShake();
 };

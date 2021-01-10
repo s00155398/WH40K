@@ -16,7 +16,7 @@ AOrk_Character::AOrk_Character()
 
 
 	RightWeapon->OnComponentBeginOverlap.AddDynamic(this, &AOrk_Character::OnBeginOverlap);
-	LeftWeapon->OnComponentBeginOverlap.AddDynamic(this, &AOrk_Character::OnBeginOverlap);
+	//LeftWeapon->OnComponentBeginOverlap.AddDynamic(this, &AOrk_Character::OnBeginOverlap);
 
 	ConstructorHelpers::FObjectFinder<UAnimMontage> AttackAnimOne(TEXT("AnimMontage'/Game/ork/Animations/PrimaryAttack_LA_Montage.PrimaryAttack_LA_Montage'"));
 	AttackMontageOne = AttackAnimOne.Object;
@@ -53,7 +53,6 @@ AOrk_Character::AOrk_Character()
 void AOrk_Character::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -71,11 +70,14 @@ void AOrk_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void AOrk_Character::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (OtherActor != NULL && OtherActor->ActorHasTag(TEXT("Player")) && IsAttacking == true)
+	if (OtherActor != NULL && OtherActor->ActorHasTag(TEXT("Player")))
 	{
-		AFireWarrior_Character* PlayerCharacter = Cast<AFireWarrior_Character>(OtherActor);
-		PlayerCharacter->HitByChoppa();
-		UE_LOG(LogTemp, Warning, TEXT("Hit"))
+		if (IsAttacking)
+		{
+			AFireWarrior_Character* PlayerCharacter = Cast<AFireWarrior_Character>(OtherActor);
+			PlayerCharacter->HitByChoppa();
+			IsAttacking = false;
+		}
 	}
 }
 
@@ -152,8 +154,8 @@ void AOrk_Character::HitByProjectile()
 			PlayAnimMontage(HitMontageFour, 1.0f);
 			break;
 		}
+		UpdateHealth();
 	}
-	UpdateHealth();
 }
 
 void AOrk_Character::UpdateHealth()
@@ -166,20 +168,8 @@ void AOrk_Character::UpdateHealth()
 		this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-		DisintegrationChance = FMath::RandRange(0, 10);
-
-		if (DisintegrationChance > 7)
-		{
-			Disintegration();
-		}
-	}
-}
-
-void AOrk_Character::Disintegration()
-{
-	for (int i = 0; i < 4; i++)
-	{
-		this->GetMesh()->CreateDynamicMaterialInstance(i);
 		
+		InitiateDisintegration();
 	}
 }
+
