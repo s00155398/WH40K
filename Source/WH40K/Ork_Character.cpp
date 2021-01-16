@@ -98,6 +98,7 @@ void AOrk_Character::AttackInitiated()
 			break;
 
 		case 1:
+			AttackCount = 0;
 			PlayAnimMontage(AttackMontageTwo, 1.0f);
 			break;
 		}
@@ -121,6 +122,7 @@ void AOrk_Character::ComboAttackSave()
 			break;
 
 		case 1:
+			AttackCount = 0;
 			PlayAnimMontage(AttackMontageTwo, 1.0f);
 			break;
 		}

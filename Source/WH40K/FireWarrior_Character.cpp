@@ -271,7 +271,7 @@ void AFireWarrior_Character::HitByChoppa()
 		{
 		case 0:
 			PlayAnimMontage(HitMontageOne, 1.0f);
-		break;
+			break;
 		case 1:
 			PlayAnimMontage(HitMontageTwo, 1.0f);
 			break;
