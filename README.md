@@ -7,7 +7,9 @@
 This Unreal Engine4 project contains a player controlled third-person character. The character is fully animated and modelled as a Tau Fire-Warrior from the popular Sci-Fi franchise Warhammer 40k. It also contains a controllable Imperial Space Marine Dreadnought, which is mostly animated and developed. Also within the project is several Enemy NPC's with Base AI implementation such as patrol and chase behaviours in regard to the player character.
 
 ## Updates
+
 [Shoota-Boy Update](https://youtu.be/J0ffOyMSYIo)
+
 New Ork NPC character added, with ranged weapon. WIP
 
 [Ork Disintegration Update](https://youtu.be/d9TjetxjR7U)
