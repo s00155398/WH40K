@@ -68,9 +68,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
 		bool IsOverHeating;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
-		ACarbineLaser* Laser;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 		UAnimMontage *FireMontage;
 
@@ -135,7 +132,7 @@ public:
 	void ChangeFireMode();
 	UFUNCTION()
 	void CheckFire();
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void HitByChoppa();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void InitiateCameraShake();

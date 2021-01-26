@@ -17,12 +17,6 @@ public:
 	// Sets default values for this character's properties
 	AOrk_Character();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
-		UStaticMeshComponent* RightWeapon;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
-		UStaticMeshComponent* LeftWeapon;
-
-
 	AFireWarrior_Character* FireWarriorRef;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
@@ -71,22 +65,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	
+	
 
-	UFUNCTION()
-		void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-	UFUNCTION(BlueprintCallable)
-		void AttackInitiated();
-	UFUNCTION(BlueprintCallable)
-		void ComboAttackSave();
-	UFUNCTION(BlueprintCallable)
-		void ResetCombo();
-
-	UFUNCTION(BlueprintCallable)
-		void HitByProjectile();
-	UFUNCTION()
-		void UpdateHealth();
-	UFUNCTION(BlueprintImplementableEvent,BlueprintCallable)
-		void InitiateDisintegration();
 	
 };

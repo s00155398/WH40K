@@ -68,13 +68,13 @@ AFireWarrior_Character::AFireWarrior_Character()
 
 	FireMode = 1;
 
-	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimOne(TEXT("AnimMontage'/Game/tAU/Animations/Hit_React_1_Montage.Hit_React_1_Montage'"));
+	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimOne(TEXT("AnimMontage'/Game/FireCaste/Animations/HitReact_Front_Montage.HitReact_Front_Montage'"));
 	HitMontageOne = HitAnimOne.Object;
-	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimTwo(TEXT("AnimMontage'/Game/tAU/Animations/Hit_React_2_Montage.Hit_React_2_Montage'"));
+	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimTwo(TEXT("AnimMontage'/Game/FireCaste/Animations/HitReact_Back_Montage.HitReact_Back_Montage'"));
 	HitMontageTwo = HitAnimTwo.Object;
-	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimThree(TEXT("AnimMontage'/Game/tAU/Animations/Hit_React_3_Montage.Hit_React_3_Montage'"));
+	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimThree(TEXT("AnimMontage'/Game/FireCaste/Animations/HitReact_Left_Montage.HitReact_Left_Montage'"));
 	HitMontageThree = HitAnimThree.Object;
-	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimFour(TEXT("AnimMontage'/Game/tAU/Animations/Hit_React_4_Montage.Hit_React_4_Montage'"));
+	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimFour(TEXT("AnimMontage'/Game/FireCaste/Animations/HitReact_Right_Montage.HitReact_Right_Montage'"));
 	HitMontageFour = HitAnimFour.Object;
 }
 
