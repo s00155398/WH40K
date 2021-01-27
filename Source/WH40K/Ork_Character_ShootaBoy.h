@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Ork_Character.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Ork_Character_ShootaBoy.generated.h"
 
 /**
@@ -33,7 +36,26 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
 		int ammo;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+		UAnimMontage* FireMontage;
+
+	TSubclassOf<class AActor> MyProjectileBlueprint;
 
 	
+	USoundCue* ShootaShot;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Particle System")
+	UParticleSystem* MuzzleParticleSystem;
+
+	FTimerHandle FireDelayTimerHandle;
+	FTimerHandle ReloadTimerHandle;
+
+	bool bCanFire;
+
+	void ResetFire();
+
+	void Reload();
+
+	UFUNCTION(BlueprintCallable)
+		void FireShoota(ACharacter* PlayerRef);
 };
