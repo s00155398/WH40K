@@ -8,6 +8,10 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 ## Updates
 
+[Shoota-Boy Death & Particle Update](https://youtu.be/fp0399UB5zU)
+
+Shoota-Boy now has a death state along with new particle systems for this state and firing its weapon.
+
 [Shoota-Boy Update](https://youtu.be/J0ffOyMSYIo)
 
 New Ork NPC character added, with ranged weapon. WIP
