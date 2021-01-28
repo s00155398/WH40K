@@ -58,4 +58,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void FireShoota(ACharacter* PlayerRef);
+	UFUNCTION(BlueprintCallable)
+		void HitByProjectile();
+	UFUNCTION()
+		void UpdateHealth();
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+		void InitiateDisintegration();
 };

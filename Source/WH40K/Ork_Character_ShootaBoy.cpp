@@ -27,7 +27,13 @@ AOrk_Character_ShootaBoy::AOrk_Character_ShootaBoy()
 
 	ShootaShot = Shot.Object;
 
+	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimOne(TEXT("AnimMontage'/Game/ork/ShootaBoy/Animations/HitReact_Back_Montage.HitReact_Back_Montage'"));
+	HitMontageOne = HitAnimOne.Object;
+
 	bCanFire = true;
+
+	Health = 100;
+	HitCount = 0;
 }
 
 
@@ -62,6 +68,30 @@ void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 		}
 	}
 	
+}
+
+void AOrk_Character_ShootaBoy::HitByProjectile()
+{
+	if (Health > 0)
+	{
+		PlayAnimMontage(HitMontageOne, 1.0f);
+		UpdateHealth();
+	}
+}
+
+void AOrk_Character_ShootaBoy::UpdateHealth()
+{
+	Health -= Damage;
+	if (Health <= 0)
+	{
+		GetMesh()->bNoSkeletonUpdate = true;
+		this->DetachFromControllerPendingDestroy();
+		this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		Shoota->DetachFromParent();
+		Shoota->SetSimulatePhysics(true);
+		InitiateDisintegration();
+	}
 }
 
 void AOrk_Character_ShootaBoy::ResetFire()

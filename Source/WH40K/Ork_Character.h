@@ -19,22 +19,13 @@ public:
 
 	AFireWarrior_Character* FireWarriorRef;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage* AttackMontageOne;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage* AttackMontageTwo;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage* HitMontageOne;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage* HitMontageTwo;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage* HitMontageThree;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage* HitMontageFour;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage* DeathMontage;
+	UAnimMontage* AttackMontageOne;
+	UAnimMontage* AttackMontageTwo;
+	UAnimMontage* HitMontageOne;
+	UAnimMontage* HitMontageTwo;
+	UAnimMontage* HitMontageThree;
+	UAnimMontage* HitMontageFour;
+	UAnimMontage* DeathMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		bool IsAttacking;
