@@ -25,6 +25,8 @@ AFireWarrior_Character::AFireWarrior_Character()
 	BaseTurnRate = 45.0f;
 	BaseLookUpRate = 45.0f;
 
+	Health = 100;
+	IsDead = false;
 
 	AimTimelineCurve = CreateDefaultSubobject<UCurveFloat>(FName("Aim Curve"));
 	AimTimelineCurve->FloatCurve.AddKey(0.0f,150.0f);
@@ -38,6 +40,7 @@ AFireWarrior_Character::AFireWarrior_Character()
 	ConstructorHelpers::FObjectFinder<UAnimMontage> anim(TEXT("AnimMontage'/Game/FireCaste/Animations/Fire_Short_Montage.Fire_Short_Montage'"));
 
 	FireMontage = anim.Object;
+
 
 	IsOverHeating = false;
 
@@ -144,7 +147,7 @@ void AFireWarrior_Character::Aim()
 {
 	IsAiming = true;
 	bUseControllerRotationYaw = true;
-
+	GetCharacterMovement()->MaxWalkSpeed = 450.0f;
 	AimTimeline.PlayFromStart();
 }
 
@@ -152,6 +155,7 @@ void AFireWarrior_Character::Aimout()
 {
 	IsAiming = false;
 	bUseControllerRotationYaw = false;
+	GetCharacterMovement()->MaxWalkSpeed = 600.0f;
 	AimTimeline.Reverse();
 }
 
@@ -262,28 +266,41 @@ void AFireWarrior_Character::CheckFire()
 	}
 }
 
-void AFireWarrior_Character::HitByChoppa()
+void AFireWarrior_Character::HitByEnemy()
 {
-	if (!IsAttacking)
+	if (Health - 10 == 0)
 	{
-		HitCount = FMath::RandRange(0, 3);
-		switch (HitCount)
-		{
-		case 0:
-			PlayAnimMontage(HitMontageOne, 1.0f);
-			break;
-		case 1:
-			PlayAnimMontage(HitMontageTwo, 1.0f);
-			break;
-		case 2:
-			PlayAnimMontage(HitMontageThree, 1.0f);
-			break;
-		case 3:
-			PlayAnimMontage(HitMontageFour, 1.0f);
-			break;
-		}
-
+		Health -= 10;
+		IsDead = true;
+		InitiateCameraShake();
+		GetController()->SetIgnoreMoveInput(true);
+		this->DetachFromControllerPendingDestroy();
+		this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
-	InitiateCameraShake();	
+	else
+	{
+		if (!IsAttacking)
+		{
+			HitCount = FMath::RandRange(0, 3);
+			switch (HitCount)
+			{
+			case 0:
+				PlayAnimMontage(HitMontageOne, 1.0f);
+				break;
+			case 1:
+				PlayAnimMontage(HitMontageTwo, 1.0f);
+				break;
+			case 2:
+				PlayAnimMontage(HitMontageThree, 1.0f);
+				break;
+			case 3:
+				PlayAnimMontage(HitMontageFour, 1.0f);
+				break;
+			}
+		}
+		InitiateCameraShake();
+		Health -= 10;
+	}
 }
 

@@ -69,7 +69,7 @@ void AOrk_Character_OrkBoy::OnBeginOverlap(UPrimitiveComponent* OverlappedCompon
 		if (IsAttacking)
 		{
 			AFireWarrior_Character* PlayerCharacter = Cast<AFireWarrior_Character>(OtherActor);
-			PlayerCharacter->HitByChoppa();
+			PlayerCharacter->HitByEnemy();
 			IsAttacking = false;
 		}
 	}
@@ -159,7 +159,19 @@ void AOrk_Character_OrkBoy::UpdateHealth()
 	Health -= Damage;
 	if (Health <= 0)
 	{
-		PlayAnimMontage(DeathMontage, 1.0f);
+		GetMesh()->bNoSkeletonUpdate = true;
+		WeaponOne->DetachFromParent();
+		WeaponOne->SetSimulatePhysics(true);
+
+		WeaponTwo->DetachFromParent();
+		WeaponTwo->SetSimulatePhysics(true);
+
+		WeaponOne->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		WeaponTwo->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+
+		WeaponOne->SetCollisionProfileName(FName("BlockAll"));
+		WeaponTwo->SetCollisionProfileName(FName("BlockAll"));
+
 		this->DetachFromControllerPendingDestroy();
 		this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);

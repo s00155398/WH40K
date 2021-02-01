@@ -52,7 +52,10 @@ public:
 		bool IsFiring;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		float CoolDownSpeed;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		float Health;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		bool IsDead;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Aiming")
 		UCurveFloat *AimTimelineCurve;
 
@@ -82,6 +85,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 		UAnimMontage* HitMontageFour;
+
 	
 	USoundCue* OverheatAudioCue;
 	UAudioComponent* OverheatAudioComponent;
@@ -133,7 +137,7 @@ public:
 	UFUNCTION()
 	void CheckFire();
 	UFUNCTION(BlueprintCallable)
-	void HitByChoppa();
+	void HitByEnemy();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void InitiateCameraShake();
 };
