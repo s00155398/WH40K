@@ -12,6 +12,10 @@ It also contains a controllable Imperial Space Marine Dreadnought, which is most
 
 ## Updates
 
+[Player Death & Detour Ai Update](https://youtu.be/nNUuQo4sFkM)
+
+Player character now enters a death state once their health reaches zero, Ork NPC Ai controllers have been reparented to Detour Ai Controller Class to allow for smoother navigation.
+
 [Shoota-Boy Death & Particle Update](https://youtu.be/fp0399UB5zU)
 
 Shoota-Boy now has a death state along with new particle systems for this state and firing its weapon.
