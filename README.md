@@ -12,6 +12,10 @@ It also contains a controllable Imperial Space Marine Dreadnought, which is most
 
 ## Updates
 
+[Ork Prop System](https://youtu.be/d5wiyGBt3Vw)
+
+Orks now have props which are assigned randomly at runtime.
+
 [Player Death & Detour Ai Update](https://youtu.be/nNUuQo4sFkM)
 
 Player character now enters a death state once their health reaches zero, Ork NPC Ai controllers have been reparented to Detour Ai Controller Class to allow for smoother navigation.
