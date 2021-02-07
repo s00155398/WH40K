@@ -12,6 +12,10 @@ It also contains a controllable Imperial Space Marine Dreadnought, which is most
 
 ## Updates
 
+[Ork Accuracy Update](https://youtu.be/U4kb10TQ70w)
+
+Ork shoota boys now have inaccurate fire.
+
 [Ork Prop System](https://youtu.be/d5wiyGBt3Vw)
 
 Orks now have props which are assigned randomly at runtime.
