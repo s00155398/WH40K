@@ -79,6 +79,8 @@ AFireWarrior_Character::AFireWarrior_Character()
 	HitMontageThree = HitAnimThree.Object;
 	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimFour(TEXT("AnimMontage'/Game/FireCaste/Animations/HitReact_Right_Montage.HitReact_Right_Montage'"));
 	HitMontageFour = HitAnimFour.Object;
+
+	Damage = 0.1f;
 }
 
 // Called when the game starts or when spawned
@@ -268,9 +270,9 @@ void AFireWarrior_Character::CheckFire()
 
 void AFireWarrior_Character::HitByEnemy()
 {
-	if (Health - 10 == 0)
+	if (Health - Damage == 0)
 	{
-		Health -= 10;
+		Health -= Damage;
 		IsDead = true;
 		InitiateCameraShake();
 		GetController()->SetIgnoreMoveInput(true);

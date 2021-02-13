@@ -17,6 +17,11 @@ class WH40K_API AOrk_Character_ShootaBoy : public AOrk_Character
 {
 	GENERATED_BODY()
 	
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 public:
 
 	AOrk_Character_ShootaBoy();
@@ -38,6 +43,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 		UAnimMontage* FireMontage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
+	float BulletSpread;
 
 	TSubclassOf<class AActor> MyProjectileBlueprint;
 

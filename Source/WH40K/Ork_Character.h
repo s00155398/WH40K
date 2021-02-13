@@ -5,17 +5,84 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "FireWarrior_Character.h"
+#include "Components/HierarchicalInstancedStaticMeshComponent.h"
 #include "Ork_Character.generated.h"
 
 
 UCLASS()
 class WH40K_API AOrk_Character : public ACharacter
 {
-	GENERATED_BODY()
+	GENERATED_UCLASS_BODY()
 
 public:
 	// Sets default values for this character's properties
-	AOrk_Character();
+	
+	// Boot Meshes
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMesh* BootLeftMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMesh* BootRightMesh;
+
+	// Helmet / Head Meshes
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* FullHelmMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* HelmVisorMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* JawGuardMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* PikkelHelmMesh;
+
+	// Misc Meshes
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* BannerMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* BackPackMesh;
+
+	// Pauldron Meshes
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* LeftPauldronOneMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* LeftPauldronTwoMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* RightPauldronOneMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* RightPauldronTwoMesh;
+
+
+	// Boot Mesh Instance Components
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UInstancedStaticMeshComponent* BootLeftMeshInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UInstancedStaticMeshComponent* BootRightMeshInstance;
+
+	// Helm Mesh Instance Components
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UInstancedStaticMeshComponent* FullHelmMeshInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UInstancedStaticMeshComponent* HelmetVisorMeshInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UInstancedStaticMeshComponent* JawGuardMeshInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UInstancedStaticMeshComponent* PikkelHelmMeshInstance;
+
+	// Misc Mesh Instance Components
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UInstancedStaticMeshComponent* BannerMeshInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UInstancedStaticMeshComponent* BackPackMeshInstance;
+
+	// Pauldron Mesh Instance Components
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UInstancedStaticMeshComponent* LeftPauldronOneMeshInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UInstancedStaticMeshComponent* LeftPauldronTwoMeshInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UInstancedStaticMeshComponent* RightPauldronOneMeshInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UInstancedStaticMeshComponent* RightPauldronTwoMeshInstance;
+
+	
 
 	AFireWarrior_Character* FireWarriorRef;
 
@@ -45,6 +112,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		float Damage;
 
+	
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -57,7 +126,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	
-	
+	UFUNCTION()
+	void RandomizeActorScale(AActor* Actor);
 
-	
+	UFUNCTION()
+	void SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget);
+
 };

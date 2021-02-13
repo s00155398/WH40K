@@ -12,7 +12,7 @@ AOrk_Character_ShootaBoy::AOrk_Character_ShootaBoy()
 	IsAiming = false;
 	IsFiring = false;
 
-	ammo = 5;
+	ammo = 30;
 
 	static ConstructorHelpers::FObjectFinder<UBlueprint> ProjectileBlueprint(TEXT("Blueprint'/Game/ork/ShootaBoy/ShootaProjectile_BP.ShootaProjectile_BP'"));
 	if (ProjectileBlueprint.Object) {
@@ -34,9 +34,18 @@ AOrk_Character_ShootaBoy::AOrk_Character_ShootaBoy()
 
 	Health = 100;
 	HitCount = 0;
+
+	BulletSpread = 0.5f;
+	
+	RandomizeActorScale(this);
+	
+
 }
 
-
+void AOrk_Character_ShootaBoy::BeginPlay()
+{
+	SpawnOrkMeshProps(GetMesh());
+}
 
 void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 {
@@ -49,8 +58,12 @@ void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 		{
 			FVector ProjectileSocketLoc = Shoota->GetSocketLocation(FName("ProjectileSocket"));
 			FVector PlayerLoc = PlayerRef->GetActorLocation();
-
+			//BulletSpread = UKismetMathLibrary::RandomFloatInRange(0.0f, 10.0f);
 			FRotator  ProjectileSpawnRotation = UKismetMathLibrary::FindLookAtRotation(ProjectileSocketLoc, PlayerLoc);
+
+			ProjectileSpawnRotation.Pitch += UKismetMathLibrary::RandomFloatInRange(-5.0f, 5.0f);
+			ProjectileSpawnRotation.Yaw += UKismetMathLibrary::RandomFloatInRange(-10.0f, 10.0f);
+			ProjectileSpawnRotation.Roll += UKismetMathLibrary::RandomFloatInRange(-5.0f, 5.0f);
 
 			if (ammo > 0)
 			{
@@ -59,7 +72,7 @@ void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 				UAudioComponent* AudioComponent = UGameplayStatics::SpawnSoundAtLocation(this, ShootaShot, ProjectileSocketLoc, FRotator::ZeroRotator, 1.0f, 1.0f, 0.0f, nullptr, nullptr, true);
 				ammo--;
 				UGameplayStatics::SpawnEmitterAttached(MuzzleParticleSystem,Shoota, FName("ProjectileSocket"));
-				World->GetTimerManager().SetTimer(FireDelayTimerHandle, this, &AOrk_Character_ShootaBoy::ResetFire, 0.2f, false);
+				World->GetTimerManager().SetTimer(FireDelayTimerHandle, this, &AOrk_Character_ShootaBoy::ResetFire, 0.1f, false);
 			}
 			else
 			{
@@ -102,7 +115,7 @@ void AOrk_Character_ShootaBoy::ResetFire()
 
 void AOrk_Character_ShootaBoy::Reload()
 {
-	ammo = 5;
+	ammo = 30;
 	bCanFire = true;
 	GetWorldTimerManager().ClearTimer(ReloadTimerHandle);
 }

@@ -55,6 +55,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		float Health;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
+		float Damage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		bool IsDead;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Aiming")
 		UCurveFloat *AimTimelineCurve;

@@ -44,16 +44,19 @@ AOrk_Character_OrkBoy::AOrk_Character_OrkBoy()
 	DeathCount = 0;
 	DisintegrationChance = 0;
 	Damage = 10;
+
+	
+	RandomizeActorScale(this);
+	
+	
 }
 
 void AOrk_Character_OrkBoy::BeginPlay()
 {
 	Super::BeginPlay();
-
 	WeaponOne->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("Right_Weapon"));
 	WeaponTwo->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("Left_Weapon"));
-
-	
+	SpawnOrkMeshProps(GetMesh());
 }
 
 void AOrk_Character_OrkBoy::Tick(float DeltaTime)
