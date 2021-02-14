@@ -10,6 +10,9 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 
 ## Updates
+[Ork prop disintegration Update](https://youtu.be/Uui3X5A1oo8)
+
+Ork props now disintegrate with the Ork at death.
 
 [Ork Accuracy Update](https://youtu.be/U4kb10TQ70w)
 
