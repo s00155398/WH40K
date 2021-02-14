@@ -16,7 +16,7 @@ class WH40K_API AOrk_Character : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	TArray<UInstancedStaticMeshComponent*> Instances;
 
 	// Boot Meshes
@@ -53,35 +53,35 @@ public:
 
 
 	// Boot Mesh Instance Components
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* BootLeftMeshInstance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* BootRightMeshInstance;
 
 	// Helm Mesh Instance Components
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* FullHelmMeshInstance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* HelmetVisorMeshInstance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* JawGuardMeshInstance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* PikkelHelmMeshInstance;
 
 	// Misc Mesh Instance Components
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* BannerMeshInstance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* BackPackMeshInstance;
 
 	// Pauldron Mesh Instance Components
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* LeftPauldronOneMeshInstance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* LeftPauldronTwoMeshInstance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* RightPauldronOneMeshInstance;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* RightPauldronTwoMeshInstance;
 
 	

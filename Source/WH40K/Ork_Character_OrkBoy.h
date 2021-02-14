@@ -17,6 +17,8 @@ protected:
 	virtual void BeginPlay() override;
 
 public:
+	
+
 		AOrk_Character_OrkBoy();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")

@@ -24,6 +24,7 @@ protected:
 
 public:
 
+
 	AOrk_Character_ShootaBoy();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")

@@ -2,7 +2,8 @@
 
 
 #include "Ork_Character.h"
-
+#include <WH40K/Ork_Character_ShootaBoy.h>
+#include <WH40K/Ork_Character_OrkBoy.h>
 // Sets default values
 AOrk_Character::AOrk_Character(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -124,8 +125,21 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 
 		InstanceTransform.SetLocation(FVector::ZeroVector);
 		InstanceTransform.SetRotation(FQuat::Identity);
-
+		
 		BootRightMeshInstance->AddInstance(InstanceTransform);
+
+		if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+		{
+			AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+			OrkRef->Instances.Add(BootRightMeshInstance);
+			OrkRef->Instances.Add(BootLeftMeshInstance);
+		}
+		else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+		{
+			AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+			OrkRef->Instances.Add(BootRightMeshInstance);
+			OrkRef->Instances.Add(BootLeftMeshInstance);
+		}
 		
 #pragma endregion
 
@@ -142,7 +156,18 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			FullHelmMeshInstance->AddInstance(InstanceTransform);
-		
+
+			if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+			{
+				AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(FullHelmMeshInstance);
+			}
+			else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+			{
+				AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(FullHelmMeshInstance);
+			}
+
 			break;
 		case 1:
 			HelmetVisorMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -152,7 +177,18 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			HelmetVisorMeshInstance->AddInstance(InstanceTransform);
-		
+
+			if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+			{
+				AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(HelmetVisorMeshInstance);
+			}
+			else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+			{
+				AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(HelmetVisorMeshInstance);
+			}
+
 			break;
 		case 2:
 			JawGuardMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -162,7 +198,18 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			JawGuardMeshInstance->AddInstance(InstanceTransform);
-		
+
+			if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+			{
+				AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(JawGuardMeshInstance);
+			}
+			else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+			{
+				AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(JawGuardMeshInstance);
+			}
+
 			break;
 		case 3:
 			PikkelHelmMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -172,7 +219,18 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			PikkelHelmMeshInstance->AddInstance(InstanceTransform);
-		
+
+			if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+			{
+				AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(PikkelHelmMeshInstance);
+			}
+			else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+			{
+				AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(PikkelHelmMeshInstance);
+			}
+
 			break;
 		case 4:
 			break;
@@ -192,6 +250,18 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetRotation(FQuat::Identity);
 			BannerMeshInstance->AddInstance(InstanceTransform);
 			Instances.Add(BannerMeshInstance);
+
+			if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+			{
+				AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(BannerMeshInstance);
+			}
+			else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+			{
+				AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(BannerMeshInstance);
+			}
+
 			break;
 		case 1:
 			BackPackMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -202,6 +272,17 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetRotation(FQuat::Identity);
 			BackPackMeshInstance->AddInstance(InstanceTransform);
 		
+			if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+			{
+				AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(BackPackMeshInstance);
+			}
+			else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+			{
+				AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(BackPackMeshInstance);
+			}
+
 			break;
 		case 2:
 			break;
@@ -222,6 +303,17 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			LeftPauldronOneMeshInstance->AddInstance(InstanceTransform);
+
+			if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+			{
+				AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(LeftPauldronOneMeshInstance);
+			}
+			else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+			{
+				AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(LeftPauldronOneMeshInstance);
+			}
 		
 			break;
 		case 1:
@@ -232,7 +324,18 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			LeftPauldronTwoMeshInstance->AddInstance(InstanceTransform);
-			
+
+			if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+			{
+				AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(LeftPauldronTwoMeshInstance);
+			}
+			else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+			{
+				AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(LeftPauldronTwoMeshInstance);
+			}
+
 			break;
 		case 2:
 			RightPauldronOneMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -242,6 +345,17 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			RightPauldronOneMeshInstance->AddInstance(InstanceTransform);
+
+			if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+			{
+				AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(RightPauldronOneMeshInstance);
+			}
+			else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+			{
+				AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(RightPauldronOneMeshInstance);
+			}
 		
 			break;
 		case 3:
@@ -253,6 +367,17 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetRotation(FQuat::Identity);
 			RightPauldronTwoMeshInstance->AddInstance(InstanceTransform);
 		
+			if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+			{
+				AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(RightPauldronTwoMeshInstance);
+			}
+			else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+			{
+				AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(RightPauldronTwoMeshInstance);
+			}
+
 			break;
 		case 4:
 			LeftPauldronOneMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -271,6 +396,21 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			RightPauldronOneMeshInstance->AddInstance(InstanceTransform);
+
+			if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+			{
+				AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(LeftPauldronOneMeshInstance);
+				OrkRef->Instances.Add(RightPauldronOneMeshInstance);
+			}
+			else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+			{
+				AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(LeftPauldronOneMeshInstance);
+				OrkRef->Instances.Add(RightPauldronOneMeshInstance);
+			}
+
+
 			
 			break;
 		case 5:
@@ -291,7 +431,20 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			RightPauldronTwoMeshInstance->AddInstance(InstanceTransform);
-			
+
+			if (MeshTarget->GetOwner()->ActorHasTag("shoota"))
+			{
+				AOrk_Character_ShootaBoy* OrkRef = Cast<AOrk_Character_ShootaBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(LeftPauldronTwoMeshInstance);
+				OrkRef->Instances.Add(RightPauldronTwoMeshInstance);
+			}
+			else if (MeshTarget->GetOwner()->ActorHasTag("boy"))
+			{
+				AOrk_Character_OrkBoy* OrkRef = Cast<AOrk_Character_OrkBoy>(MeshTarget->GetOwner());
+				OrkRef->Instances.Add(LeftPauldronTwoMeshInstance);
+				OrkRef->Instances.Add(RightPauldronTwoMeshInstance);
+			}
+
 			break;
 		}
 #pragma endregion
