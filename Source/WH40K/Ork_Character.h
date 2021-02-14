@@ -16,12 +16,14 @@ class WH40K_API AOrk_Character : public ACharacter
 
 public:
 	// Sets default values for this character's properties
-	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<UInstancedStaticMeshComponent*> Instances;
+
 	// Boot Meshes
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		UStaticMesh* BootLeftMesh;
+	UStaticMesh* BootLeftMesh;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		UStaticMesh* BootRightMesh;
+	UStaticMesh* BootRightMesh;
 
 	// Helmet / Head Meshes
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -132,4 +134,5 @@ public:
 	UFUNCTION()
 	void SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget);
 
+	
 };

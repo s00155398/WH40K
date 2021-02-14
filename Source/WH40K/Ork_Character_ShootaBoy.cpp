@@ -58,7 +58,6 @@ void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 		{
 			FVector ProjectileSocketLoc = Shoota->GetSocketLocation(FName("ProjectileSocket"));
 			FVector PlayerLoc = PlayerRef->GetActorLocation();
-			//BulletSpread = UKismetMathLibrary::RandomFloatInRange(0.0f, 10.0f);
 			FRotator  ProjectileSpawnRotation = UKismetMathLibrary::FindLookAtRotation(ProjectileSocketLoc, PlayerLoc);
 
 			ProjectileSpawnRotation.Pitch += UKismetMathLibrary::RandomFloatInRange(-5.0f, 5.0f);

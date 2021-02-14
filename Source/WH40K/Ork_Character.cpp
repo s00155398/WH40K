@@ -104,6 +104,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 	
 	if (MeshTarget)
 	{	
+#pragma region Boot Prop Generation
 		BootLeftMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
 		BootLeftMeshInstance->SetupAttachment(MeshTarget, FName("boot_left_socket"));
 		BootLeftMeshInstance->RegisterComponent();
@@ -114,6 +115,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 		InstanceTransform.SetRotation(FQuat::Identity);
 
 		BootLeftMeshInstance->AddInstance(InstanceTransform);
+	
 
 		BootRightMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
 		BootRightMeshInstance->SetupAttachment(MeshTarget, FName("boot_rightsocket"));
@@ -124,7 +126,8 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 		InstanceTransform.SetRotation(FQuat::Identity);
 
 		BootRightMeshInstance->AddInstance(InstanceTransform);
-
+		
+#pragma endregion
 
 #pragma region Helmet Prop Generation
 
@@ -139,6 +142,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			FullHelmMeshInstance->AddInstance(InstanceTransform);
+		
 			break;
 		case 1:
 			HelmetVisorMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -148,6 +152,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			HelmetVisorMeshInstance->AddInstance(InstanceTransform);
+		
 			break;
 		case 2:
 			JawGuardMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -157,6 +162,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			JawGuardMeshInstance->AddInstance(InstanceTransform);
+		
 			break;
 		case 3:
 			PikkelHelmMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -166,6 +172,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			PikkelHelmMeshInstance->AddInstance(InstanceTransform);
+		
 			break;
 		case 4:
 			break;
@@ -184,6 +191,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			BannerMeshInstance->AddInstance(InstanceTransform);
+			Instances.Add(BannerMeshInstance);
 			break;
 		case 1:
 			BackPackMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -193,6 +201,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			BackPackMeshInstance->AddInstance(InstanceTransform);
+		
 			break;
 		case 2:
 			break;
@@ -213,6 +222,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			LeftPauldronOneMeshInstance->AddInstance(InstanceTransform);
+		
 			break;
 		case 1:
 			LeftPauldronTwoMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -222,6 +232,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			LeftPauldronTwoMeshInstance->AddInstance(InstanceTransform);
+			
 			break;
 		case 2:
 			RightPauldronOneMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -231,6 +242,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			RightPauldronOneMeshInstance->AddInstance(InstanceTransform);
+		
 			break;
 		case 3:
 			RightPauldronTwoMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -240,6 +252,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			RightPauldronTwoMeshInstance->AddInstance(InstanceTransform);
+		
 			break;
 		case 4:
 			LeftPauldronOneMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -249,6 +262,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			LeftPauldronOneMeshInstance->AddInstance(InstanceTransform);
+		
 
 			RightPauldronOneMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
 			RightPauldronOneMeshInstance->SetupAttachment(MeshTarget, FName("rightPauldronSocket"));
@@ -257,6 +271,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			RightPauldronOneMeshInstance->AddInstance(InstanceTransform);
+			
 			break;
 		case 5:
 			LeftPauldronTwoMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -266,6 +281,7 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			LeftPauldronTwoMeshInstance->AddInstance(InstanceTransform);
+		
 			break;
 		case 6:
 			RightPauldronTwoMeshInstance = NewObject<UInstancedStaticMeshComponent>(MeshTarget);
@@ -275,11 +291,13 @@ void AOrk_Character::SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget)
 			InstanceTransform.SetLocation(FVector::ZeroVector);
 			InstanceTransform.SetRotation(FQuat::Identity);
 			RightPauldronTwoMeshInstance->AddInstance(InstanceTransform);
+			
 			break;
 		}
-	}
 #pragma endregion
-
+	}
 
 
 }
+
+
