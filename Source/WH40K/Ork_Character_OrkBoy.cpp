@@ -37,7 +37,7 @@ AOrk_Character_OrkBoy::AOrk_Character_OrkBoy()
 	DeathMontage = DeathAnim.Object;
 
 	SaveAttack = false;
-	IsAttacking = false;
+	IsAttacking = true;
 	AttackCount = 0;
 	HitCount = 0;
 	Health = 100;

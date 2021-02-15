@@ -4,6 +4,7 @@
 #include "Ork_Character_ShootaBoy.h"
 AOrk_Character_ShootaBoy::AOrk_Character_ShootaBoy()
 {
+	GetMesh()->bNoSkeletonUpdate = false;
 	Shoota = CreateDefaultSubobject<UStaticMeshComponent>(FName("Shoota"));
 	Shoota->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, FName("Shoota_Socket"));
 
@@ -37,13 +38,14 @@ AOrk_Character_ShootaBoy::AOrk_Character_ShootaBoy()
 
 	BulletSpread = 0.5f;
 	
-	RandomizeActorScale(this);
 	
-
 }
 
 void AOrk_Character_ShootaBoy::BeginPlay()
 {
+	Super::BeginPlay();
+	RandomizeActorScale(this);
+
 	SpawnOrkMeshProps(GetMesh());
 }
 
