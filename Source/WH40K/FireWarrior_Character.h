@@ -13,7 +13,6 @@
 #include "Components/TimelineComponent.h"
 #include "Components/ArrowComponent.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "CarbineLaser.h"
 #include "Sound/SoundCue.h"
 #include "FireWarrior_Character.generated.h"
 

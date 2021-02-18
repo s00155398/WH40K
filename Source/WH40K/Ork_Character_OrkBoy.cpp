@@ -46,9 +46,6 @@ AOrk_Character_OrkBoy::AOrk_Character_OrkBoy()
 	Damage = 10;
 
 	
-	RandomizeActorScale(this);
-	
-	
 }
 
 void AOrk_Character_OrkBoy::BeginPlay()
@@ -56,7 +53,8 @@ void AOrk_Character_OrkBoy::BeginPlay()
 	Super::BeginPlay();
 	WeaponOne->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("Right_Weapon"));
 	WeaponTwo->AttachToComponent(GetMesh(), FAttachmentTransformRules(EAttachmentRule::SnapToTarget, true), TEXT("Left_Weapon"));
-	SpawnOrkMeshProps(GetMesh());
+	SpawnOrkProps(this);
+	RandomizeActorScale(this);
 }
 
 void AOrk_Character_OrkBoy::Tick(float DeltaTime)

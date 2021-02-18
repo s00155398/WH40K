@@ -19,6 +19,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	TArray<UInstancedStaticMeshComponent*> Instances;
 
+	//Torso Meshes
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMesh* torsoOneMesh;
+
 	// Boot Meshes
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UStaticMesh* BootLeftMesh;
@@ -51,6 +55,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UStaticMesh* RightPauldronTwoMesh;
 
+
+	//Torso Mesh Instance Components
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
+		class UInstancedStaticMeshComponent* TorsoOneMeshInstance;
 
 	// Boot Mesh Instance Components
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
@@ -130,9 +138,8 @@ public:
 	
 	UFUNCTION()
 	void RandomizeActorScale(AActor* Actor);
-
+	
 	UFUNCTION()
-	void SpawnOrkMeshProps(USkeletalMeshComponent* MeshTarget);
-
+		void SpawnOrkProps(AOrk_Character* OrkReference);
 	
 };

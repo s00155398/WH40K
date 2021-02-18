@@ -45,8 +45,7 @@ void AOrk_Character_ShootaBoy::BeginPlay()
 {
 	Super::BeginPlay();
 	RandomizeActorScale(this);
-
-	SpawnOrkMeshProps(GetMesh());
+	SpawnOrkProps(this);
 }
 
 void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
