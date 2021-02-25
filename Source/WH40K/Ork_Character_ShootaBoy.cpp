@@ -20,16 +20,24 @@ AOrk_Character_ShootaBoy::AOrk_Character_ShootaBoy()
 		MyProjectileBlueprint = (UClass*)ProjectileBlueprint.Object->GeneratedClass;
 	}
 
-	ConstructorHelpers::FObjectFinder<UAnimMontage> anim(TEXT("AnimMontage'/Game/ork/ShootaBoy/Animations/Fire_Fast_Montage.Fire_Fast_Montage'"));
-
-	FireMontage = anim.Object;
+	ConstructorHelpers::FObjectFinder<UAnimMontage> anim(TEXT("AnimMontage'/Game/ork/ShootaBoy/Animations/Fire_A_Fast_V1_Montage.Fire_A_Fast_V1_Montage'"));
+	if (anim.Object)
+	{
+		FireMontage = anim.Object;
+	}
+	
 
 	ConstructorHelpers::FObjectFinder<USoundCue> Shot(TEXT("SoundCue'/Game/ork/ShootaBoy/Sound/Shoota_Wav_Cue.Shoota_Wav_Cue'"));
-
-	ShootaShot = Shot.Object;
+	if (Shot.Object) {
+		ShootaShot = Shot.Object;
+	}
 
 	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimOne(TEXT("AnimMontage'/Game/ork/ShootaBoy/Animations/HitReact_Back_Montage.HitReact_Back_Montage'"));
-	HitMontageOne = HitAnimOne.Object;
+	if (HitAnimOne.Object)
+	{
+		HitMontageOne = HitAnimOne.Object;
+	}
+	
 
 	bCanFire = true;
 
@@ -65,8 +73,9 @@ void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 			ProjectileSpawnRotation.Yaw += UKismetMathLibrary::RandomFloatInRange(-10.0f, 10.0f);
 			ProjectileSpawnRotation.Roll += UKismetMathLibrary::RandomFloatInRange(-5.0f, 5.0f);
 
-			if (ammo > 0)
+			if (ammo > 0 && IsAiming)
 			{
+				IsFiring = true;
 				AActor* Projectile = World->SpawnActor<AActor>(MyProjectileBlueprint, ProjectileSocketLoc, ProjectileSpawnRotation);
 				PlayAnimMontage(FireMontage, 1.0f);
 				UAudioComponent* AudioComponent = UGameplayStatics::SpawnSoundAtLocation(this, ShootaShot, ProjectileSocketLoc, FRotator::ZeroRotator, 1.0f, 1.0f, 0.0f, nullptr, nullptr, true);
@@ -76,6 +85,8 @@ void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 			}
 			else
 			{
+				IsFiring = false;
+				IsAiming = false;
 				World->GetTimerManager().SetTimer(ReloadTimerHandle, this, &AOrk_Character_ShootaBoy::Reload, 2.0f, false);
 			}
 		}
@@ -117,5 +128,6 @@ void AOrk_Character_ShootaBoy::Reload()
 {
 	ammo = 30;
 	bCanFire = true;
+	IsAiming = true;
 	GetWorldTimerManager().ClearTimer(ReloadTimerHandle);
 }
