@@ -12,8 +12,9 @@ AOrk_Character_ShootaBoy::AOrk_Character_ShootaBoy()
 
 	IsAiming = false;
 	IsFiring = false;
+	IsReloading = false;
 
-	ammo = 30;
+	fullAmmo = 25;
 
 	static ConstructorHelpers::FObjectFinder<UBlueprint> ProjectileBlueprint(TEXT("Blueprint'/Game/ork/ShootaBoy/ShootaProjectile_BP.ShootaProjectile_BP'"));
 	if (ProjectileBlueprint.Object) {
@@ -46,6 +47,7 @@ AOrk_Character_ShootaBoy::AOrk_Character_ShootaBoy()
 
 	BulletSpread = 0.5f;
 	
+	ammo = fullAmmo;
 	
 }
 
@@ -87,6 +89,7 @@ void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 			{
 				IsFiring = false;
 				IsAiming = false;
+				IsReloading = true;
 				World->GetTimerManager().SetTimer(ReloadTimerHandle, this, &AOrk_Character_ShootaBoy::Reload, 2.0f, false);
 			}
 		}
@@ -126,8 +129,9 @@ void AOrk_Character_ShootaBoy::ResetFire()
 
 void AOrk_Character_ShootaBoy::Reload()
 {
-	ammo = 30;
+	ammo = fullAmmo;
 	bCanFire = true;
 	IsAiming = true;
+	IsReloading = false;
 	GetWorldTimerManager().ClearTimer(ReloadTimerHandle);
 }

@@ -35,11 +35,17 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
 		bool IsFiring;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
+		bool IsReloading;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Opponent")
 		AActor* Opponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
 		int ammo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
+		int fullAmmo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 		UAnimMontage* FireMontage;
