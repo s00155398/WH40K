@@ -2,6 +2,7 @@
 
 
 #include "Ork_Character_ShootaBoy.h"
+
 AOrk_Character_ShootaBoy::AOrk_Character_ShootaBoy()
 {
 	GetMesh()->bNoSkeletonUpdate = false;
@@ -58,6 +59,41 @@ void AOrk_Character_ShootaBoy::BeginPlay()
 	SpawnOrkProps(this);
 }
 
+void AOrk_Character_ShootaBoy::Tick(float DeltaTime)
+{
+	PrimaryActorTick.bCanEverTick = true;
+
+	Super::Tick(DeltaTime);
+	if (UFMODBlueprintStatics::EventInstanceIsValid(InstanceWrapper))
+	{
+		UFMODBlueprintStatics::EventInstanceSetTransform(InstanceWrapper, GetActorTransform());
+	}
+
+
+	if (IsFiring)
+	{
+		if (AudioComponent)
+		{
+			if (AudioComponent->IsPlaying())
+			{
+				
+			}
+			else
+			{
+				StartFireAudio();
+			}
+		}	
+	}
+	else
+	{
+		if (AudioComponent)
+		{
+			StopFireAudio();
+		}
+	}
+	
+}
+
 void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 {
 	UWorld* const World = GetWorld();
@@ -77,16 +113,18 @@ void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 
 			if (ammo > 0 && IsAiming)
 			{
+				IsAudioPlaying = true;
+				
 				IsFiring = true;
 				AActor* Projectile = World->SpawnActor<AActor>(MyProjectileBlueprint, ProjectileSocketLoc, ProjectileSpawnRotation);
 				PlayAnimMontage(FireMontage, 1.0f);
-				UAudioComponent* AudioComponent = UGameplayStatics::SpawnSoundAtLocation(this, ShootaShot, ProjectileSocketLoc, FRotator::ZeroRotator, 1.0f, 1.0f, 0.0f, nullptr, nullptr, true);
 				ammo--;
 				UGameplayStatics::SpawnEmitterAttached(MuzzleParticleSystem,Shoota, FName("ProjectileSocket"));
 				World->GetTimerManager().SetTimer(FireDelayTimerHandle, this, &AOrk_Character_ShootaBoy::ResetFire, 0.1f, false);
 			}
 			else
 			{
+				IsAudioPlaying = false;
 				IsFiring = false;
 				IsAiming = false;
 				IsReloading = true;
@@ -134,4 +172,15 @@ void AOrk_Character_ShootaBoy::Reload()
 	IsAiming = true;
 	IsReloading = false;
 	GetWorldTimerManager().ClearTimer(ReloadTimerHandle);
+}
+
+void AOrk_Character_ShootaBoy::StartFireAudio()
+{
+	AudioComponent = UFMODBlueprintStatics::PlayEventAttached(Event, Shoota, FName("ProjectileSocket"), Shoota->GetSocketLocation("ProjectileSocket"), EAttachLocation::SnapToTarget, true, true, true);
+}
+
+void AOrk_Character_ShootaBoy::StopFireAudio()
+{
+	AudioComponent->Stop();
+	AudioComponent->Release();
 }

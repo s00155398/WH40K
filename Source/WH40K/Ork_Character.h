@@ -98,6 +98,8 @@ public:
 
 	UAnimMontage* AttackMontageOne;
 	UAnimMontage* AttackMontageTwo;
+	UAnimMontage* AttackMontageThree;
+	UAnimMontage* AttackMontageFour;
 	UAnimMontage* HitMontageOne;
 	UAnimMontage* HitMontageTwo;
 	UAnimMontage* HitMontageThree;

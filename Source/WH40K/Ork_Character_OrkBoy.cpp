@@ -21,6 +21,12 @@ AOrk_Character_OrkBoy::AOrk_Character_OrkBoy()
 	ConstructorHelpers::FObjectFinder<UAnimMontage> AttackAnimTwo(TEXT("AnimMontage'/Game/ork/Animations/PrimaryAttack_RA_Montage.PrimaryAttack_RA_Montage'"));
 	AttackMontageTwo = AttackAnimTwo.Object;
 
+	ConstructorHelpers::FObjectFinder<UAnimMontage> AttackAnimThree(TEXT("AnimMontage'/Game/ork/OrkBoy/Animations/Melee_A_Montage.Melee_A_Montage'"));
+	AttackMontageOne = AttackAnimThree.Object;
+
+	ConstructorHelpers::FObjectFinder<UAnimMontage> AttackAnimFour(TEXT("AnimMontage'/Game/ork/OrkBoy/Animations/Melee_C_Montage.Melee_C_Montage'"));
+	AttackMontageTwo = AttackAnimFour.Object;
+
 	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimOne(TEXT("AnimMontage'/Game/ork/Animations/HitReact_Front_Montage.HitReact_Front_Montage'"));
 	HitMontageOne = HitAnimOne.Object;
 
@@ -95,6 +101,16 @@ void AOrk_Character_OrkBoy::AttackInitiated()
 		case 1:
 			AttackCount = 0;
 			PlayAnimMontage(AttackMontageTwo, 1.0f);
+			break;
+
+		case 2:
+			AttackCount = 2;
+			PlayAnimMontage(AttackMontageThree, 1.0f);
+			break;
+
+		case 3:
+			AttackCount = 3;
+			PlayAnimMontage(AttackMontageFour, 1.0f);
 			break;
 		}
 	}

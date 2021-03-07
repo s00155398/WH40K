@@ -274,7 +274,7 @@ void AFireWarrior_Character::HitByEnemy()
 	{
 		Health -= Damage;
 		IsDead = true;
-		InitiateCameraShake();
+		//InitiateCameraShake();
 		GetController()->SetIgnoreMoveInput(true);
 		this->DetachFromControllerPendingDestroy();
 		this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -301,7 +301,7 @@ void AFireWarrior_Character::HitByEnemy()
 				break;
 			}
 		}
-		InitiateCameraShake();
+		//InitiateCameraShake();
 		Health -= 10;
 	}
 }
