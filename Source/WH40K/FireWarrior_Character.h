@@ -74,6 +74,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 		UAnimMontage *FireMontage;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+		UAnimMontage* ChargeMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 		UAnimMontage* HitMontageOne;
@@ -91,6 +93,9 @@ public:
 	USoundCue* OverheatAudioCue;
 	UAudioComponent* OverheatAudioComponent;
 
+	USoundCue* ChargeAudioCue;
+	UAudioComponent* ChargeAudioComponent;
+
 	FVector StartLoc;
 
 	FRotator StartRot;
@@ -99,6 +104,8 @@ public:
 		int FireMode;
 
 	FTimerHandle FireTimerHandle;
+
+	FTimerHandle ChargeTimerHandle;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		int HitCount;
@@ -121,6 +128,8 @@ public:
 	void Aimout();
 	UFUNCTION()
 	void Fire();
+	UFUNCTION()
+	void ChargeFire();
 	UFUNCTION()
 	void StopFire();
 	UFUNCTION(BlueprintCallable)

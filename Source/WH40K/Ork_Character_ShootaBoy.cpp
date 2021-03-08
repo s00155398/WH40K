@@ -135,18 +135,18 @@ void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 	
 }
 
-void AOrk_Character_ShootaBoy::HitByProjectile()
+void AOrk_Character_ShootaBoy::HitByProjectile(float dps)
 {
 	if (Health > 0)
 	{
 		PlayAnimMontage(HitMontageOne, 1.0f);
-		UpdateHealth();
+		UpdateHealth(dps);
 	}
 }
 
-void AOrk_Character_ShootaBoy::UpdateHealth()
+void AOrk_Character_ShootaBoy::UpdateHealth(float dps)
 {
-	Health -= Damage;
+	Health -= dps;
 	if (Health <= 0)
 	{
 		GetMesh()->bNoSkeletonUpdate = true;

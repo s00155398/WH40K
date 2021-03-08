@@ -49,9 +49,7 @@ AOrk_Character_OrkBoy::AOrk_Character_OrkBoy()
 	Health = 100;
 	DeathCount = 0;
 	DisintegrationChance = 0;
-	Damage = 10;
-
-	
+		
 }
 
 void AOrk_Character_OrkBoy::BeginPlay()
@@ -147,7 +145,7 @@ void AOrk_Character_OrkBoy::ResetCombo()
 	IsAttacking = false;
 }
 
-void AOrk_Character_OrkBoy::HitByProjectile()
+void AOrk_Character_OrkBoy::HitByProjectile(float dps)
 {
 	if (Health > 0)
 	{
@@ -167,13 +165,13 @@ void AOrk_Character_OrkBoy::HitByProjectile()
 			PlayAnimMontage(HitMontageFour, 1.0f);
 			break;
 		}
-		UpdateHealth();
+		UpdateHealth(dps);
 	}
 }
 
-void AOrk_Character_OrkBoy::UpdateHealth()
+void AOrk_Character_OrkBoy::UpdateHealth(float dps)
 {
-	Health -= Damage;
+	Health -= dps;
 	if (Health <= 0)
 	{
 		GetMesh()->bNoSkeletonUpdate = true;

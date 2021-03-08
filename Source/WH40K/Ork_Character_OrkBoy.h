@@ -36,9 +36,9 @@ public:
 		void ResetCombo();
 
 	UFUNCTION(BlueprintCallable)
-		void HitByProjectile();
+		void HitByProjectile(float dps);
 	UFUNCTION()
-		void UpdateHealth();
+		void UpdateHealth(float dps);
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 		void InitiateDisintegration();
 	UFUNCTION()

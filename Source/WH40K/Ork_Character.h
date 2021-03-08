@@ -142,6 +142,6 @@ public:
 	void RandomizeActorScale(AActor* Actor);
 	
 	UFUNCTION()
-		void SpawnOrkProps(AOrk_Character* OrkReference);
+	void SpawnOrkProps(AOrk_Character* OrkReference);
 	
 };

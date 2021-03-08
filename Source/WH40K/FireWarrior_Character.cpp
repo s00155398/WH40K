@@ -41,6 +41,9 @@ AFireWarrior_Character::AFireWarrior_Character()
 
 	FireMontage = anim.Object;
 
+	ConstructorHelpers::FObjectFinder<UAnimMontage> ChargeFireanim(TEXT("AnimMontage'/Game/FireCaste/Animations/Fire_A_Slow_MontageT.Fire_A_Slow_MontageT'"));
+
+	ChargeMontage = ChargeFireanim.Object;
 
 	IsOverHeating = false;
 
@@ -67,6 +70,22 @@ AFireWarrior_Character::AFireWarrior_Character()
 	if (OverheatAudioCue->IsValidLowLevelFast()) 
 	{
 		OverheatAudioComponent->SetSound(OverheatAudioCue);
+	}
+
+	static ConstructorHelpers::FObjectFinder<USoundCue> ChargeCue(
+		TEXT("SoundCue'/Game/Audio/Energy_-_force_field_5_loop_Cue.Energy_-_force_field_5_loop_Cue'"));
+
+	ChargeAudioCue = ChargeCue.Object;
+
+	ChargeAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("ChargeAudioComp"));
+	ChargeAudioComponent->bAutoActivate = false;
+
+	ChargeAudioComponent->AttachTo(RootComponent);
+	ChargeAudioComponent->SetRelativeLocation(FVector(100.0f, 0.0f, 0.0f));
+
+	if (ChargeAudioCue->IsValidLowLevelFast())
+	{
+		ChargeAudioComponent->SetSound(ChargeAudioCue);
 	}
 
 	FireMode = 1;
@@ -122,6 +141,9 @@ void AFireWarrior_Character::Tick(float DeltaTime)
 	{
 		IsOverHeating = true;
 		OverheatAudioComponent->Play();
+		ChargeAudioComponent->Stop();
+		GetWorldTimerManager().ClearTimer(ChargeTimerHandle);
+		GetWorldTimerManager().ClearTimer(FireTimerHandle);
 	}
 
 	if (IsOverHeating == true && CarbineHeat <= 0)
@@ -185,33 +207,57 @@ void AFireWarrior_Character::Fire()
 		}
 		else
 		{
-			IsAttacking = true;
-
-			switch (AttackCount)
+			switch (FireMode)
 			{
-			case 0:
-				AttackCount = 1;
-				PlayAnimMontage(FireMontage,1.0f);
-				FireProjectile();
-				break;
 			case 1:
-				AttackCount = 0;
+				IsAttacking = true;
 				PlayAnimMontage(FireMontage, 1.0f);
 				FireProjectile();
+				if (IsOverHeating != true && IsAiming)
+				{
+					CarbineHeat += 6;
+				}
 				break;
 			}
 		}
 	}
 
-	if (IsOverHeating != true && IsAiming)
-	{
-		CarbineHeat += 6;
-	}
+	
 }
+
 
 void AFireWarrior_Character::StopFire()
 {
-	GetWorldTimerManager().ClearTimer(FireTimerHandle);
+	switch (FireMode)
+	{
+	case 0:
+		if (IsAiming == true && IsOverHeating != true && CarbineHeat > 0)
+		{
+			FireProjectile();
+			if (CarbineHeat - 20 < 0)
+			{
+				CarbineHeat -= 20;
+			}
+			else
+			{
+				CarbineHeat = 0;
+			}
+			PlayAnimMontage(ChargeMontage, 1.0f);
+			ChargeAudioComponent->Stop();
+			GetWorldTimerManager().ClearTimer(ChargeTimerHandle);
+		}
+		else
+		{
+			ChargeAudioComponent->Stop();
+			GetWorldTimerManager().ClearTimer(ChargeTimerHandle);
+		}
+		break;
+	case 1:
+		GetWorldTimerManager().ClearTimer(FireTimerHandle);
+		break;
+	}
+	
+	
 }
 
 void AFireWarrior_Character::ResetCombo()
@@ -259,12 +305,15 @@ void AFireWarrior_Character::ChangeFireMode()
 
 void AFireWarrior_Character::CheckFire()
 {
-	if (FireMode == 1) {
-		GetWorldTimerManager().SetTimer(FireTimerHandle, this, &AFireWarrior_Character::Fire, 0.15f, true, 0.01f);
-	}
-	else 
+	switch (FireMode)
 	{
-		Fire();
+	case 0:
+		GetWorldTimerManager().SetTimer(ChargeTimerHandle, this, &AFireWarrior_Character::ChargeFire, 0.15f, true, 0.01f);
+		ChargeAudioComponent->Play();
+		break;
+	case 1:
+		GetWorldTimerManager().SetTimer(FireTimerHandle, this, &AFireWarrior_Character::Fire, 0.15f, true, 0.01f);
+		break;
 	}
 }
 
@@ -306,3 +355,7 @@ void AFireWarrior_Character::HitByEnemy()
 	}
 }
 
+void AFireWarrior_Character::ChargeFire()
+{
+	CarbineHeat += 8;
+}
