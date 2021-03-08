@@ -10,6 +10,10 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 
 ## Updates
+[Fire Warrior Secondary fire mode Update](https://youtu.be/WgpE951Mr_88)
+
+The player character now can utilize a charging blast attack with the pulse carbine. Choppa boys now also have new primary animation sets.
+
 [Ork prop disintegration Update](https://youtu.be/Uui3X5A1oo8)
 
 Ork props now disintegrate with the Ork at death.
