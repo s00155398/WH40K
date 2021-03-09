@@ -64,13 +64,6 @@ void AOrk_Character_ShootaBoy::Tick(float DeltaTime)
 	PrimaryActorTick.bCanEverTick = true;
 
 	Super::Tick(DeltaTime);
-	if (UFMODBlueprintStatics::EventInstanceIsValid(InstanceWrapper))
-	{
-		UFMODBlueprintStatics::EventInstanceSetTransform(InstanceWrapper, GetActorTransform());
-	}
-	
-	
-	
 }
 
 void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
@@ -150,15 +143,4 @@ void AOrk_Character_ShootaBoy::Reload()
 	IsAiming = true;
 	IsReloading = false;
 	GetWorldTimerManager().ClearTimer(ReloadTimerHandle);
-}
-
-void AOrk_Character_ShootaBoy::StartFireAudio()
-{
-	AudioComponent = UFMODBlueprintStatics::PlayEventAttached(Event, Shoota, FName("ProjectileSocket"), Shoota->GetSocketLocation("ProjectileSocket"), EAttachLocation::SnapToTarget, true, true, true);
-}
-
-void AOrk_Character_ShootaBoy::StopFireAudio()
-{
-	AudioComponent->Stop();
-	AudioComponent->Release();
 }

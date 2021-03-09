@@ -29,14 +29,6 @@ public:
 
 	AOrk_Character_ShootaBoy();
 
-	UPROPERTY(EditAnywhere, Category = "FMOD")
-		class UFMODEvent* Event;
-
-	FFMODEventInstance InstanceWrapper;
-
-	UPROPERTY(EditAnywhere, Category = "FMOD")
-		class UFMODAudioComponent* AudioComponent;
-
 	bool IsAudioPlaying;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
@@ -92,8 +84,4 @@ public:
 		void UpdateHealth(float dps);
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 		void InitiateDisintegration();
-	UFUNCTION()
-		void StartFireAudio();
-	UFUNCTION()
-		void StopFireAudio();
 };
