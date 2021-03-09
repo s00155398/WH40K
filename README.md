@@ -10,6 +10,11 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 
 ## Updates
+
+[Ork Stun Update](https://youtu.be/zK2pNgIYmNo)
+
+The player character now can stun the orks using a suffieciently charged pulse carbine shot.
+
 [Fire Warrior Secondary fire mode Update](https://youtu.be/WgpE951Mr_88)
 
 The player character now can utilize a charging blast attack with the pulse carbine. Choppa boys now also have new primary animation sets.
