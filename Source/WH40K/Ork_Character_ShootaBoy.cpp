@@ -68,71 +68,49 @@ void AOrk_Character_ShootaBoy::Tick(float DeltaTime)
 	{
 		UFMODBlueprintStatics::EventInstanceSetTransform(InstanceWrapper, GetActorTransform());
 	}
-
-
-	if (IsFiring)
-	{
-		if (AudioComponent)
-		{
-			if (AudioComponent->IsPlaying())
-			{
-				
-			}
-			else
-			{
-				StartFireAudio();
-			}
-		}	
-	}
-	else
-	{
-		if (AudioComponent)
-		{
-			StopFireAudio();
-		}
-	}
+	
+	
 	
 }
 
 void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 {
-	UWorld* const World = GetWorld();
-	if (bCanFire)
-	{
-		bCanFire = false;
-
-		if (PlayerRef != NULL && MuzzleParticleSystem != NULL)
+		UWorld* const World = GetWorld();
+		if (bCanFire)
 		{
-			FVector ProjectileSocketLoc = Shoota->GetSocketLocation(FName("ProjectileSocket"));
-			FVector PlayerLoc = PlayerRef->GetActorLocation();
-			FRotator  ProjectileSpawnRotation = UKismetMathLibrary::FindLookAtRotation(ProjectileSocketLoc, PlayerLoc);
+			bCanFire = false;
 
-			ProjectileSpawnRotation.Pitch += UKismetMathLibrary::RandomFloatInRange(-5.0f, 5.0f);
-			ProjectileSpawnRotation.Yaw += UKismetMathLibrary::RandomFloatInRange(-10.0f, 10.0f);
-			ProjectileSpawnRotation.Roll += UKismetMathLibrary::RandomFloatInRange(-5.0f, 5.0f);
+			if (PlayerRef != NULL && MuzzleParticleSystem != NULL)
+			{
+				FVector ProjectileSocketLoc = Shoota->GetSocketLocation(FName("ProjectileSocket"));
+				FVector PlayerLoc = PlayerRef->GetActorLocation();
+				FRotator  ProjectileSpawnRotation = UKismetMathLibrary::FindLookAtRotation(ProjectileSocketLoc, PlayerLoc);
 
-			if (ammo > 0 && IsAiming)
-			{
-				IsAudioPlaying = true;
-				
-				IsFiring = true;
-				AActor* Projectile = World->SpawnActor<AActor>(MyProjectileBlueprint, ProjectileSocketLoc, ProjectileSpawnRotation);
-				PlayAnimMontage(FireMontage, 1.0f);
-				ammo--;
-				UGameplayStatics::SpawnEmitterAttached(MuzzleParticleSystem,Shoota, FName("ProjectileSocket"));
-				World->GetTimerManager().SetTimer(FireDelayTimerHandle, this, &AOrk_Character_ShootaBoy::ResetFire, 0.1f, false);
-			}
-			else
-			{
-				IsAudioPlaying = false;
-				IsFiring = false;
-				IsAiming = false;
-				IsReloading = true;
-				World->GetTimerManager().SetTimer(ReloadTimerHandle, this, &AOrk_Character_ShootaBoy::Reload, 2.0f, false);
+				ProjectileSpawnRotation.Pitch += UKismetMathLibrary::RandomFloatInRange(-5.0f, 5.0f);
+				ProjectileSpawnRotation.Yaw += UKismetMathLibrary::RandomFloatInRange(-10.0f, 10.0f);
+				ProjectileSpawnRotation.Roll += UKismetMathLibrary::RandomFloatInRange(-5.0f, 5.0f);
+
+				if (ammo > 0 && IsAiming)
+				{
+					IsAudioPlaying = true;
+
+					IsFiring = true;
+					AActor* Projectile = World->SpawnActor<AActor>(MyProjectileBlueprint, ProjectileSocketLoc, ProjectileSpawnRotation);
+					PlayAnimMontage(FireMontage, 1.0f);
+					ammo--;
+					UGameplayStatics::SpawnEmitterAttached(MuzzleParticleSystem, Shoota, FName("ProjectileSocket"));
+					World->GetTimerManager().SetTimer(FireDelayTimerHandle, this, &AOrk_Character_ShootaBoy::ResetFire, 0.1f, false);
+				}
+				else
+				{
+					IsAudioPlaying = false;
+					IsFiring = false;
+					IsAiming = false;
+					IsReloading = true;
+					World->GetTimerManager().SetTimer(ReloadTimerHandle, this, &AOrk_Character_ShootaBoy::Reload, 2.0f, false);
+				}
 			}
 		}
-	}
-	
 }
 
 void AOrk_Character_ShootaBoy::HitByProjectile(float dps)

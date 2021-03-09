@@ -77,6 +77,7 @@ AOrk_Character::AOrk_Character(const FObjectInitializer& ObjectInitializer) : Su
 	LeftPauldronTwoMesh = LeftPauldronTwoStaticMesh.Object;
 	RightPauldronOneMesh = RightPauldronOneStaticMesh.Object;
 	RightPauldronTwoMesh = RightPauldronTwoStaticMesh.Object;
+	IsStunned = false;
 }
 
 // Called when the game starts or when spawned

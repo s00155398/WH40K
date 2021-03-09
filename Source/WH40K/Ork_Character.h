@@ -111,6 +111,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		bool SaveAttack;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
+		bool IsStunned;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		int AttackCount;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		int HitCount;
