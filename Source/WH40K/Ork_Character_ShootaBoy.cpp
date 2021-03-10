@@ -64,6 +64,15 @@ void AOrk_Character_ShootaBoy::Tick(float DeltaTime)
 	PrimaryActorTick.bCanEverTick = true;
 
 	Super::Tick(DeltaTime);
+
+	if (IsStunned)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = 0;
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = 600;
+	}
 }
 
 void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
