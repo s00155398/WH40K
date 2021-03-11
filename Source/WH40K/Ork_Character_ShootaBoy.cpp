@@ -127,15 +127,32 @@ void AOrk_Character_ShootaBoy::HitByProjectile(float dps)
 void AOrk_Character_ShootaBoy::UpdateHealth(float dps)
 {
 	Health -= dps;
-	if (Health <= 0)
+	if (dps > 11)
 	{
-		GetMesh()->bNoSkeletonUpdate = true;
+		if (Health <= 0)
+		{
+			GetMesh()->bNoSkeletonUpdate = true;
+			this->DetachFromControllerPendingDestroy();
+			this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			Shoota->DetachFromParent();
+			Shoota->SetSimulatePhysics(true);
+			InitiateDisintegration();
+		}
+	}
+	else
+	{
+		if (Health <= 0)
+		{
+		this->GetController()->UnPossess();
 		this->DetachFromControllerPendingDestroy();
 		this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		GetMesh()->SetSimulatePhysics(true);
+		GetMesh()->SetCollisionProfileName("Ragdoll");
 		this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 		Shoota->DetachFromParent();
 		Shoota->SetSimulatePhysics(true);
-		InitiateDisintegration();
+		}
 	}
 }
 

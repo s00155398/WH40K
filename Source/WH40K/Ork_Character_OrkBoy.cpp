@@ -179,26 +179,49 @@ void AOrk_Character_OrkBoy::HitByProjectile(float dps)
 
 void AOrk_Character_OrkBoy::UpdateHealth(float dps)
 {
-	Health -= dps;
-	if (Health <= 0)
-	{
-		GetMesh()->bNoSkeletonUpdate = true;
-		WeaponOne->DetachFromParent();
-		WeaponOne->SetSimulatePhysics(true);
+		Health -= dps;
+		if (dps > 11)
+		{
+			if (Health <= 0)
+			{
+				GetMesh()->bNoSkeletonUpdate = true;
+				WeaponOne->DetachFromParent();
+				WeaponOne->SetSimulatePhysics(true);
 
-		WeaponTwo->DetachFromParent();
-		WeaponTwo->SetSimulatePhysics(true);
+				WeaponTwo->DetachFromParent();
+				WeaponTwo->SetSimulatePhysics(true);
 
-		WeaponOne->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-		WeaponTwo->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+				WeaponOne->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+				WeaponTwo->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
-		WeaponOne->SetCollisionProfileName(FName("BlockAll"));
-		WeaponTwo->SetCollisionProfileName(FName("BlockAll"));
+				WeaponOne->SetCollisionProfileName(FName("BlockAll"));
+				WeaponTwo->SetCollisionProfileName(FName("BlockAll"));
+				this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+				this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+				this->GetController()->UnPossess();
+				InitiateDisintegration();
+			}
+		}
+		else
+		{
+			if (Health <= 0)
+			{
+				this->GetController()->UnPossess();
+				WeaponOne->DetachFromParent();
+				WeaponOne->SetSimulatePhysics(true);
+				GetMesh()->SetSimulatePhysics(true);
+				GetMesh()->SetCollisionProfileName("Ragdoll");
+				WeaponTwo->DetachFromParent();
+				WeaponTwo->SetSimulatePhysics(true);
 
-		this->DetachFromControllerPendingDestroy();
-		this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+				WeaponOne->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+				WeaponTwo->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
-		InitiateDisintegration();
-	}
+				WeaponOne->SetCollisionProfileName(FName("BlockAll"));
+				WeaponTwo->SetCollisionProfileName(FName("BlockAll"));
+
+				this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			}
+
+		}
 }

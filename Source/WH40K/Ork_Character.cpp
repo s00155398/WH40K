@@ -356,6 +356,10 @@ void AOrk_Character::SpawnOrkProps(AOrk_Character* OrkReference)
 		}
 #pragma endregion
 	}
+	for (int i = 0; i < OrkReference->Instances.Num(); i++)
+	{
+		OrkReference->Instances[i]->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 
 }
 
