@@ -11,6 +11,10 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 ## Updates
 
+[Ork Ragdoll Update](https://youtu.be/2Ol3_iVXmWA)
+
+Orks will now ragdoll when killed by a non charged pulse carbine shot, instead a charged shot will be required to disintegrate them.
+
 [Ork Stun Update](https://youtu.be/zK2pNgIYmNo)
 
 The player character now can stun the orks using a suffieciently charged pulse carbine shot.
