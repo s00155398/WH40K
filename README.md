@@ -11,6 +11,11 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 ## Updates
 
+
+[Dodge & Move Update](https://youtu.be/1ggOAdTtUu4)
+
+The player can now utilize a dash function to help evade the orks, the shoota-boys now will try to reposition around the player once they begin reloading.
+
 [Ork Ragdoll Update](https://youtu.be/2Ol3_iVXmWA)
 
 Orks will now ragdoll when killed by a non charged pulse carbine shot, instead a charged shot will be required to disintegrate them.
