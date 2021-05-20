@@ -4,6 +4,7 @@
 #include "FireWarrior_Character.h"
 #include "DrawDebugHelpers.h"
 #include "Engine\Classes\Components\AudioComponent.h"
+#include <Runtime/Engine/Classes/Kismet/GameplayStatics.h>
 // Sets default values
 AFireWarrior_Character::AFireWarrior_Character()
 {
@@ -112,7 +113,7 @@ void AFireWarrior_Character::BeginPlay()
 void AFireWarrior_Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 	if (AimTimeline.IsPlaying())
 	{
 		AimTimeline.TickTimeline(DeltaTime);
@@ -163,6 +164,11 @@ void AFireWarrior_Character::SetupPlayerInputComponent(UInputComponent* PlayerIn
 
 	InputComponent->BindAction("Fire", IE_Pressed, this, &AFireWarrior_Character::CheckFire);
 	InputComponent->BindAction("Fire", IE_Released, this, &AFireWarrior_Character::StopFire);
+
+	InputComponent->BindAction("DodgeForward", IE_Pressed, this, &AFireWarrior_Character::frontDodge);
+	InputComponent->BindAction("DodgeBack", IE_Pressed, this, &AFireWarrior_Character::backDodge);
+	InputComponent->BindAction("DodgeRight", IE_Pressed, this, &AFireWarrior_Character::rightDodge);
+	InputComponent->BindAction("DodgeLeft", IE_Pressed, this, &AFireWarrior_Character::leftDodge);
 
 	InputComponent->BindAction("ChangeFiringMode", IE_Pressed, this, &AFireWarrior_Character::ChangeFireMode);
 }
@@ -323,7 +329,6 @@ void AFireWarrior_Character::HitByEnemy()
 	{
 		Health -= Damage;
 		IsDead = true;
-		//InitiateCameraShake();
 		GetController()->SetIgnoreMoveInput(true);
 		this->DetachFromControllerPendingDestroy();
 		this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -350,12 +355,89 @@ void AFireWarrior_Character::HitByEnemy()
 				break;
 			}
 		}
-		//InitiateCameraShake();
 		Health -= 10;
 	}
 }
 
+
 void AFireWarrior_Character::ChargeFire()
 {
 	CarbineHeat += 8;
+}
+
+
+
+void AFireWarrior_Character::frontDodge()
+{
+	if (UGameplayStatics::GetPlayerController(GetWorld(), 0)->IsInputKeyDown(EKeys::LeftShift) && !IsAiming && canDodge)
+	{
+			FVector forwardDodgeVelocity = { FollowCamera->GetForwardVector().X * 2000,FollowCamera->GetForwardVector().Y * 2000,100 };
+			if (CanJump())
+			{
+				dodgeCounter++;
+				LaunchCharacter(forwardDodgeVelocity, false, false);
+				if (dodgeCounter == 3)
+				{
+					GetWorldTimerManager().SetTimer(DodgeCooldownTimerHandle, this, &AFireWarrior_Character::ResetDodge, 2.0f, false);
+					canDodge = false;
+				}
+			}
+	}
+}
+void AFireWarrior_Character::backDodge()
+{
+	if (UGameplayStatics::GetPlayerController(GetWorld(), 0)->IsInputKeyDown(EKeys::LeftShift) && !IsAiming && canDodge)
+	{
+			FVector backDodgeVelocity = { -FollowCamera->GetForwardVector().X * 2000,-FollowCamera->GetForwardVector().Y * 2000,100 };
+			if (CanJump())
+			{
+				dodgeCounter++;
+				LaunchCharacter(backDodgeVelocity, false, false);
+				if (dodgeCounter == 3)
+				{
+					GetWorldTimerManager().SetTimer(DodgeCooldownTimerHandle, this, &AFireWarrior_Character::ResetDodge, 2.0f, false);
+					canDodge = false;
+				}
+			}
+	}
+}
+void AFireWarrior_Character::rightDodge()
+{
+	 if (UGameplayStatics::GetPlayerController(GetWorld(), 0)->IsInputKeyDown(EKeys::LeftShift) && !IsAiming && canDodge)
+	{
+			 FVector rightDodgeVelocity = { FollowCamera->GetRightVector().X * 2000,FollowCamera->GetRightVector().Y * 2000,100 };
+			 if (CanJump())
+			 {
+				 dodgeCounter++;
+				 LaunchCharacter(rightDodgeVelocity, false, false);
+				 if (dodgeCounter == 3)
+				 {
+					 GetWorldTimerManager().SetTimer(DodgeCooldownTimerHandle, this, &AFireWarrior_Character::ResetDodge, 2.0f, false);
+					 canDodge = false;
+				 }
+			 }	 
+	}
+}
+void AFireWarrior_Character::leftDodge()
+{
+	if (UGameplayStatics::GetPlayerController(GetWorld(), 0)->IsInputKeyDown(EKeys::LeftShift) && !IsAiming && canDodge)
+	{
+			FVector leftDodgeVelocity = { -FollowCamera->GetRightVector().X * 2000,-FollowCamera->GetRightVector().Y * 2000,100 };
+			if (CanJump())
+			{
+				dodgeCounter++;
+				LaunchCharacter(leftDodgeVelocity, false, false);
+				if (dodgeCounter == 3)
+				{
+					GetWorldTimerManager().SetTimer(DodgeCooldownTimerHandle, this, &AFireWarrior_Character::ResetDodge, 2.0f, false);
+					canDodge = false;
+				}
+			}
+	}
+}
+void AFireWarrior_Character::ResetDodge()
+{
+	canDodge = true;
+	dodgeCounter = 0;
+	GetWorldTimerManager().ClearTimer(DodgeCooldownTimerHandle);
 }

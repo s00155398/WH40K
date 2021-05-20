@@ -22,10 +22,10 @@ AOrk_Character_OrkBoy::AOrk_Character_OrkBoy()
 	AttackMontageTwo = AttackAnimTwo.Object;
 
 	ConstructorHelpers::FObjectFinder<UAnimMontage> AttackAnimThree(TEXT("AnimMontage'/Game/ork/OrkBoy/Animations/Melee_A_Montage.Melee_A_Montage'"));
-	AttackMontageOne = AttackAnimThree.Object;
+	AttackMontageThree = AttackAnimThree.Object;
 
 	ConstructorHelpers::FObjectFinder<UAnimMontage> AttackAnimFour(TEXT("AnimMontage'/Game/ork/OrkBoy/Animations/Melee_C_Montage.Melee_C_Montage'"));
-	AttackMontageTwo = AttackAnimFour.Object;
+	AttackMontageFour = AttackAnimFour.Object;
 
 	ConstructorHelpers::FObjectFinder<UAnimMontage> HitAnimOne(TEXT("AnimMontage'/Game/ork/Animations/HitReact_Front_Montage.HitReact_Front_Montage'"));
 	HitMontageOne = HitAnimOne.Object;
@@ -81,9 +81,11 @@ void AOrk_Character_OrkBoy::OnBeginOverlap(UPrimitiveComponent* OverlappedCompon
 	{
 		if (IsAttacking)
 		{
+			/*
 			AFireWarrior_Character* PlayerCharacter = Cast<AFireWarrior_Character>(OtherActor);
 			PlayerCharacter->HitByEnemy();
 			IsAttacking = false;
+			*/
 		}
 	}
 }
@@ -106,17 +108,7 @@ void AOrk_Character_OrkBoy::AttackInitiated()
 
 		case 1:
 			AttackCount = 0;
-			PlayAnimMontage(AttackMontageTwo, 1.0f);
-			break;
-
-		case 2:
-			AttackCount = 2;
 			PlayAnimMontage(AttackMontageThree, 1.0f);
-			break;
-
-		case 3:
-			AttackCount = 3;
-			PlayAnimMontage(AttackMontageFour, 1.0f);
 			break;
 		}
 	}
@@ -140,7 +132,7 @@ void AOrk_Character_OrkBoy::ComboAttackSave()
 
 		case 1:
 			AttackCount = 0;
-			PlayAnimMontage(AttackMontageTwo, 1.0f);
+			PlayAnimMontage(AttackMontageThree, 1.0f);
 			break;
 		}
 	}
@@ -148,7 +140,14 @@ void AOrk_Character_OrkBoy::ComboAttackSave()
 
 void AOrk_Character_OrkBoy::ResetCombo()
 {
-	AttackCount = 0;
+	if (AttackCount == 1)
+	{
+		AttackCount = 0;
+	}
+	else
+	{
+		AttackCount++;
+	}
 	SaveAttack = false;
 	IsAttacking = false;
 }

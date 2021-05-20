@@ -107,9 +107,26 @@ public:
 
 	FTimerHandle ChargeTimerHandle;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	FTimerHandle DodgeCooldownTimerHandle; 
+
+
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 		int HitCount;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	int dodgeFront = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	int dodgeBack = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	int dodgeLeft = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	int dodgeRight = 0;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
+	bool canDodge = true;
+	UPROPERTY()
+	int dodgeCounter = 0;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -150,4 +167,14 @@ public:
 	void HitByEnemy();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void InitiateCameraShake();
+	UFUNCTION()
+		void leftDodge();
+	UFUNCTION()
+		void rightDodge();
+	UFUNCTION()
+		void frontDodge();
+	UFUNCTION()
+		void backDodge();
+	UFUNCTION()
+		void ResetDodge();
 };

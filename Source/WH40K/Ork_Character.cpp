@@ -8,15 +8,22 @@
 AOrk_Character::AOrk_Character(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
 	TorsoOneMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Torso One Mesh Instances"));
+	TorsoTwoMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Torso Two Mesh Instances"));
+	TorsoThreeMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Torso Three Mesh Instances"));
+	TorsoFourMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Torso Four Mesh Instances"));
 
 	BootLeftMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Boot Left Mesh Instances"));
 	BootRightMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Boot Right Mesh Instances"));
+
 	FullHelmMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Full Helm Mesh Instances"));
 	HelmetVisorMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Helmet Visor Mesh Instances"));
 	PikkelHelmMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Pikkel Helmet Mesh Instances"));
+	GoggleHelmMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Goggle Helm Mesh Instances"));
 	JawGuardMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Jaw Guard Mesh Instances"));
+
 	BannerMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Banner Mesh Instances"));
 	BackPackMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("BackPack Mesh Instances"));
+
 	LeftPauldronOneMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Left Pauldron One Mesh Instances"));
 	LeftPauldronTwoMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Left Pauldron Two Mesh Instances"));
 	RightPauldronOneMeshInstance = ObjectInitializer.CreateDefaultSubobject<UInstancedStaticMeshComponent>(this, TEXT("Right Pauldron One Mesh Instances"));
@@ -24,6 +31,9 @@ AOrk_Character::AOrk_Character(const FObjectInitializer& ObjectInitializer) : Su
 
 
 	ConstructorHelpers::FObjectFinder<UStaticMesh> TorsoOneStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Torso/torso_armor_one.torso_armor_one'"));
+	ConstructorHelpers::FObjectFinder<UStaticMesh> TorsoTwoStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Torso/torso_armor_two.torso_armor_two'"));
+	ConstructorHelpers::FObjectFinder<UStaticMesh> TorsoThreeStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Torso/torso_armor_three.torso_armor_three'"));
+	ConstructorHelpers::FObjectFinder<UStaticMesh> TorsoFourStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Torso/torso_armor_four.torso_armor_four'"));
 
 	ConstructorHelpers::FObjectFinder<UStaticMesh> BootLeftStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Boots/bootArmorLeft.bootArmorLeft'"));
 	ConstructorHelpers::FObjectFinder<UStaticMesh> BootRightStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Boots/bootArmorRight.bootArmorRight'"));
@@ -32,6 +42,7 @@ AOrk_Character::AOrk_Character(const FObjectInitializer& ObjectInitializer) : Su
 	ConstructorHelpers::FObjectFinder<UStaticMesh> HelmVisorStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Helmets/HelmetWVisor.HelmetWVisor'"));
 	ConstructorHelpers::FObjectFinder<UStaticMesh> JawGuardStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Helmets/JawGuard.JawGuard'"));
 	ConstructorHelpers::FObjectFinder<UStaticMesh> PikkelHelmStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Helmets/PikkelHelm.PikkelHelm'"));
+	ConstructorHelpers::FObjectFinder<UStaticMesh> GoggleHelmStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Helmets/GoggleHelm.GoggleHelm'"));
 
 	ConstructorHelpers::FObjectFinder<UStaticMesh> BannerStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Misc/Banner.Banner'"));
 	ConstructorHelpers::FObjectFinder<UStaticMesh> BackPackStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Misc/pack.pack'"));
@@ -42,6 +53,9 @@ AOrk_Character::AOrk_Character(const FObjectInitializer& ObjectInitializer) : Su
 	ConstructorHelpers::FObjectFinder<UStaticMesh> RightPauldronTwoStaticMesh(TEXT("StaticMesh'/Game/ork/Props/Pauldrons/RightPauldronTwo.RightPauldronTwo'"));
 
 	TorsoOneMeshInstance->SetupAttachment(GetMesh(), FName("torso_armor_one"));
+	TorsoTwoMeshInstance->SetupAttachment(GetMesh(), FName("torso_armor_two"));
+	TorsoThreeMeshInstance->SetupAttachment(GetMesh(), FName("torso_armor_three"));
+	TorsoFourMeshInstance->SetupAttachment(GetMesh(), FName("torso_armor_four"));
 
 	BootLeftMeshInstance->SetupAttachment(GetMesh(), FName("boot_left_socket"));
 	BootRightMeshInstance->SetupAttachment(GetMesh(), FName("boot_rightsocket"));
@@ -50,6 +64,7 @@ AOrk_Character::AOrk_Character(const FObjectInitializer& ObjectInitializer) : Su
 	HelmetVisorMeshInstance->SetupAttachment(GetMesh(), FName("helmWvisorSocket"));
 	PikkelHelmMeshInstance->SetupAttachment(GetMesh(), FName("pikkelhelmsocket"));
 	JawGuardMeshInstance->SetupAttachment(GetMesh(), FName("jawsocket"));
+	GoggleHelmMeshInstance->SetupAttachment(GetMesh(), FName("goggleHelmSocket"));
 
 	BannerMeshInstance->SetupAttachment(GetMesh(), FName("bannerSocket"));
 	BackPackMeshInstance->SetupAttachment(GetMesh(), FName("backpackSocket"));
@@ -60,6 +75,9 @@ AOrk_Character::AOrk_Character(const FObjectInitializer& ObjectInitializer) : Su
 	RightPauldronTwoMeshInstance->SetupAttachment(GetMesh(), FName("rightPauldronSocket"));
 
 	torsoOneMesh = TorsoOneStaticMesh.Object;
+	torsoTwoMesh = TorsoTwoStaticMesh.Object;
+	torsoThreeMesh = TorsoThreeStaticMesh.Object;
+	torsoFourMesh = TorsoFourStaticMesh.Object;
 
 	BootLeftMesh = BootLeftStaticMesh.Object;
 	
@@ -69,6 +87,7 @@ AOrk_Character::AOrk_Character(const FObjectInitializer& ObjectInitializer) : Su
 	HelmVisorMesh = HelmVisorStaticMesh.Object;
 	JawGuardMesh = JawGuardStaticMesh.Object;
 	PikkelHelmMesh = PikkelHelmStaticMesh.Object;
+	GoggleHelmMesh = GoggleHelmStaticMesh.Object;
 
 	BannerMesh = BannerStaticMesh.Object;
 	BackPackMesh = BackPackStaticMesh.Object;
@@ -99,12 +118,13 @@ void AOrk_Character::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-void AOrk_Character::RandomizeActorScale(AActor* Actor)
+void AOrk_Character::RandomizeActorScale(AOrk_Character* OrkReference)
 {
 	float RanScaleRange = UKismetMathLibrary::RandomFloatInRange(0.9f, 1.3f);
 	FVector NewScale = { RanScaleRange ,RanScaleRange , RanScaleRange };
-
-	Actor->SetActorRelativeScale3D(NewScale);
+	
+	OrkReference->Health *= RanScaleRange;
+	OrkReference->SetActorRelativeScale3D(NewScale);
 }
 
 void AOrk_Character::SpawnOrkProps(AOrk_Character* OrkReference)
@@ -113,20 +133,71 @@ void AOrk_Character::SpawnOrkProps(AOrk_Character* OrkReference)
 
 	if (OrkReference)
 	{
-
-#pragma region Torso Prop generation
-		TorsoOneMeshInstance = NewObject<UInstancedStaticMeshComponent>(OrkReference->GetMesh());
-		TorsoOneMeshInstance->SetupAttachment(OrkReference->GetMesh(), FName("torso_armor_one"));
-		TorsoOneMeshInstance->RegisterComponent();
-		TorsoOneMeshInstance->SetStaticMesh(torsoOneMesh);
-
 		FTransform InstanceTransform;
-		InstanceTransform.SetLocation(FVector::ZeroVector);
-		InstanceTransform.SetRotation(FQuat::Identity);
+		
+#pragma region Torso Prop generation
+		ranNum = UKismetMathLibrary::RandomIntegerInRange(0, 4);
+		switch (ranNum)
+		{
+		case 0:
+			TorsoOneMeshInstance = NewObject<UInstancedStaticMeshComponent>(OrkReference->GetMesh());
+			TorsoOneMeshInstance->SetupAttachment(OrkReference->GetMesh(), FName("torso_armor_one"));
+			TorsoOneMeshInstance->RegisterComponent();
+			TorsoOneMeshInstance->SetStaticMesh(torsoOneMesh);
 
-		TorsoOneMeshInstance->AddInstance(InstanceTransform);
+			InstanceTransform.SetLocation(FVector::ZeroVector);
+			InstanceTransform.SetRotation(FQuat::Identity);
 
-		OrkReference->Instances.Add(TorsoOneMeshInstance);
+			TorsoOneMeshInstance->AddInstance(InstanceTransform);
+
+			OrkReference->Instances.Add(TorsoOneMeshInstance);
+			break;
+
+		case 1:
+			TorsoTwoMeshInstance = NewObject<UInstancedStaticMeshComponent>(OrkReference->GetMesh());
+			TorsoTwoMeshInstance->SetupAttachment(OrkReference->GetMesh(), FName("torso_armor_two"));
+			TorsoTwoMeshInstance->RegisterComponent();
+			TorsoTwoMeshInstance->SetStaticMesh(torsoTwoMesh);
+
+			InstanceTransform.SetLocation(FVector::ZeroVector);
+			InstanceTransform.SetRotation(FQuat::Identity);
+
+			TorsoTwoMeshInstance->AddInstance(InstanceTransform);
+
+			OrkReference->Instances.Add(TorsoTwoMeshInstance);
+			break;
+
+		case 2:
+			TorsoThreeMeshInstance = NewObject<UInstancedStaticMeshComponent>(OrkReference->GetMesh());
+			TorsoThreeMeshInstance->SetupAttachment(OrkReference->GetMesh(), FName("torso_armor_three"));
+			TorsoThreeMeshInstance->RegisterComponent();
+			TorsoThreeMeshInstance->SetStaticMesh(torsoThreeMesh);
+
+			InstanceTransform.SetLocation(FVector::ZeroVector);
+			InstanceTransform.SetRotation(FQuat::Identity);
+
+			TorsoThreeMeshInstance->AddInstance(InstanceTransform);
+
+			OrkReference->Instances.Add(TorsoThreeMeshInstance);
+			break;
+
+		case 3:
+			TorsoFourMeshInstance = NewObject<UInstancedStaticMeshComponent>(OrkReference->GetMesh());
+			TorsoFourMeshInstance->SetupAttachment(OrkReference->GetMesh(), FName("torso_armor_four"));
+			TorsoFourMeshInstance->RegisterComponent();
+			TorsoFourMeshInstance->SetStaticMesh(torsoFourMesh);
+
+			InstanceTransform.SetLocation(FVector::ZeroVector);
+			InstanceTransform.SetRotation(FQuat::Identity);
+
+			TorsoFourMeshInstance->AddInstance(InstanceTransform);
+
+			OrkReference->Instances.Add(TorsoFourMeshInstance);
+			break;
+
+		case 4:
+			break;
+		}
 #pragma endregion
 
 #pragma region Boot Prop Generation
@@ -157,7 +228,7 @@ void AOrk_Character::SpawnOrkProps(AOrk_Character* OrkReference)
 
 #pragma region Helmet Prop Generation
 
-		ranNum = UKismetMathLibrary::RandomIntegerInRange(0, 4);
+		ranNum = UKismetMathLibrary::RandomIntegerInRange(0, 5);
 		switch (ranNum)
 		{
 		case 0:
@@ -170,7 +241,6 @@ void AOrk_Character::SpawnOrkProps(AOrk_Character* OrkReference)
 			FullHelmMeshInstance->AddInstance(InstanceTransform);
 
 			OrkReference->Instances.Add(FullHelmMeshInstance);
-
 			break;
 		case 1:
 			HelmetVisorMeshInstance = NewObject<UInstancedStaticMeshComponent>(OrkReference->GetMesh());
@@ -181,10 +251,7 @@ void AOrk_Character::SpawnOrkProps(AOrk_Character* OrkReference)
 			InstanceTransform.SetRotation(FQuat::Identity);
 			HelmetVisorMeshInstance->AddInstance(InstanceTransform);
 
-
-			
 			OrkReference->Instances.Add(HelmetVisorMeshInstance);
-
 			break;
 		case 2:
 			JawGuardMeshInstance = NewObject<UInstancedStaticMeshComponent>(OrkReference->GetMesh());
@@ -196,8 +263,6 @@ void AOrk_Character::SpawnOrkProps(AOrk_Character* OrkReference)
 			JawGuardMeshInstance->AddInstance(InstanceTransform);
 
 			OrkReference->Instances.Add(JawGuardMeshInstance);
-			
-
 			break;
 		case 3:
 			PikkelHelmMeshInstance = NewObject<UInstancedStaticMeshComponent>(OrkReference->GetMesh());
@@ -211,15 +276,26 @@ void AOrk_Character::SpawnOrkProps(AOrk_Character* OrkReference)
 			OrkReference->Instances.Add(PikkelHelmMeshInstance);
 			break;
 		case 4:
+			GoggleHelmMeshInstance = NewObject<UInstancedStaticMeshComponent>(OrkReference->GetMesh());
+			GoggleHelmMeshInstance->SetupAttachment(OrkReference->GetMesh(), FName("goggleHelmSocket"));
+			GoggleHelmMeshInstance->RegisterComponent();
+			GoggleHelmMeshInstance->SetStaticMesh(GoggleHelmMesh);
+			InstanceTransform.SetLocation(FVector::ZeroVector);
+			InstanceTransform.SetRotation(FQuat::Identity);
+			GoggleHelmMeshInstance->AddInstance(InstanceTransform);
+
+			OrkReference->Instances.Add(GoggleHelmMeshInstance);
+			break;
+
+		case 5:
 			break;
 		}
 #pragma endregion
 
 #pragma region Misc Prop Generation
-		ranNum = UKismetMathLibrary::RandomIntegerInRange(0, 2);
-		switch (ranNum)
+		ranNum = UKismetMathLibrary::RandomIntegerInRange(0, 10);
+		if (ranNum > 9)
 		{
-		case 0:
 			BannerMeshInstance = NewObject<UInstancedStaticMeshComponent>(OrkReference->GetMesh());
 			BannerMeshInstance->SetupAttachment(OrkReference->GetMesh(), FName("bannerSocket"));
 			BannerMeshInstance->RegisterComponent();
@@ -230,24 +306,27 @@ void AOrk_Character::SpawnOrkProps(AOrk_Character* OrkReference)
 			Instances.Add(BannerMeshInstance);
 
 			OrkReference->Instances.Add(BannerMeshInstance);
-			
+		}
+		else
+		{
+			ranNum = UKismetMathLibrary::RandomIntegerInRange(0, 1);
+			switch (ranNum)
+			{
+			case 0:
+				break;
+			case 1:
+				BackPackMeshInstance = NewObject<UInstancedStaticMeshComponent>(OrkReference->GetMesh());
+				BackPackMeshInstance->SetupAttachment(OrkReference->GetMesh(), FName("backpackSocket"));
+				BackPackMeshInstance->RegisterComponent();
+				BackPackMeshInstance->SetStaticMesh(BackPackMesh);
+				InstanceTransform.SetLocation(FVector::ZeroVector);
+				InstanceTransform.SetRotation(FQuat::Identity);
+				BackPackMeshInstance->AddInstance(InstanceTransform);
 
-			break;
-		case 1:
-			BackPackMeshInstance = NewObject<UInstancedStaticMeshComponent>(OrkReference->GetMesh());
-			BackPackMeshInstance->SetupAttachment(OrkReference->GetMesh(), FName("backpackSocket"));
-			BackPackMeshInstance->RegisterComponent();
-			BackPackMeshInstance->SetStaticMesh(BackPackMesh);
-			InstanceTransform.SetLocation(FVector::ZeroVector);
-			InstanceTransform.SetRotation(FQuat::Identity);
-			BackPackMeshInstance->AddInstance(InstanceTransform);
+				OrkReference->Instances.Add(BackPackMeshInstance);
 
-			OrkReference->Instances.Add(BackPackMeshInstance);
-			
-
-			break;
-		case 2:
-			break;
+				break;
+			}
 		}
 #pragma endregion
 

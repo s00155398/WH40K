@@ -22,6 +22,12 @@ public:
 	//Torso Meshes
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UStaticMesh* torsoOneMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMesh* torsoTwoMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMesh* torsoThreeMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UStaticMesh* torsoFourMesh;
 
 	// Boot Meshes
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -38,6 +44,8 @@ public:
 	UStaticMesh* JawGuardMesh;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UStaticMesh* PikkelHelmMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMesh* GoggleHelmMesh;
 
 	// Misc Meshes
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -59,6 +67,12 @@ public:
 	//Torso Mesh Instance Components
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 		class UInstancedStaticMeshComponent* TorsoOneMeshInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
+		class UInstancedStaticMeshComponent* TorsoTwoMeshInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
+		class UInstancedStaticMeshComponent* TorsoThreeMeshInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
+		class UInstancedStaticMeshComponent* TorsoFourMeshInstance;
 
 	// Boot Mesh Instance Components
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
@@ -75,6 +89,8 @@ public:
 	class UInstancedStaticMeshComponent* JawGuardMeshInstance;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
 	class UInstancedStaticMeshComponent* PikkelHelmMeshInstance;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
+	class UInstancedStaticMeshComponent* GoggleHelmMeshInstance;
 
 	// Misc Mesh Instance Components
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Instanced Static Meshes")
@@ -141,7 +157,7 @@ public:
 
 	
 	UFUNCTION()
-	void RandomizeActorScale(AActor* Actor);
+	void RandomizeActorScale(AOrk_Character* OrkReference);
 	
 	UFUNCTION()
 	void SpawnOrkProps(AOrk_Character* OrkReference);
