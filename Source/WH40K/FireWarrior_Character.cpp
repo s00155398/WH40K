@@ -1,10 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
-
+#pragma once
 #include "FireWarrior_Character.h"
 #include "DrawDebugHelpers.h"
 #include "Engine\Classes\Components\AudioComponent.h"
 #include <Runtime/Engine/Classes/Kismet/GameplayStatics.h>
+#include "chargedProjectile.h"
 // Sets default values
 AFireWarrior_Character::AFireWarrior_Character()
 {
@@ -101,6 +101,18 @@ AFireWarrior_Character::AFireWarrior_Character()
 	HitMontageFour = HitAnimFour.Object;
 
 	Damage = 0.1f;
+
+	static ConstructorHelpers::FObjectFinder<UBlueprint> ProjectileBp(
+		TEXT("Blueprint'/Game/FireCaste/Projectile/Projectile_BP.Projectile_BP'"));
+		if (ProjectileBp.Object) {
+		projectile = (UClass*)ProjectileBp.Object->GeneratedClass;
+		}
+		
+		ConstructorHelpers::FObjectFinder<USoundCue> Shot(TEXT("SoundCue'/Game/Audio/Alliance-AssaultRifle_05-Single_Shot-04_Cue.Alliance-AssaultRifle_05-Single_Shot-04_Cue'"));
+		if (Shot.Object) {
+			CarbineShot = Shot.Object;
+		}
+
 }
 
 // Called when the game starts or when spawned
@@ -152,6 +164,8 @@ void AFireWarrior_Character::Tick(float DeltaTime)
 		IsOverHeating = false;
 	}
 
+	
+
 }
 
 // Called to bind functionality to input
@@ -201,6 +215,7 @@ void AFireWarrior_Character::OverHeatTimelineFunc(float Duration)
 
 void AFireWarrior_Character::Fire()
 {	
+	
 	if (CarbineHeat + 10 >= 100)
 	{
 		OverheatAudioComponent->Play();
@@ -216,19 +231,19 @@ void AFireWarrior_Character::Fire()
 			switch (FireMode)
 			{
 			case 1:
-				IsAttacking = true;
-				PlayAnimMontage(FireMontage, 1.0f);
-				FireProjectile();
 				if (IsOverHeating != true && IsAiming)
 				{
 					CarbineHeat += 6;
 				}
+				tempCarbineHeat = CarbineHeat;
+				IsAttacking = true;
+				PlayAnimMontage(FireMontage, 1.0f);
+				FireProjectile();
 				break;
 			}
 		}
 	}
-
-	
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Heat Value: %f"), tempCarbineHeat));
 }
 
 
@@ -237,16 +252,17 @@ void AFireWarrior_Character::StopFire()
 	switch (FireMode)
 	{
 	case 0:
-		if (IsAiming == true && IsOverHeating != true && CarbineHeat > 0)
+		if (IsAiming == true && IsOverHeating != true && CarbineHeat > 20)
 		{
-			FireProjectile();
 			if (CarbineHeat - 20 < 0)
 			{
 				CarbineHeat -= 20;
+				FireProjectile();
 			}
 			else
 			{
 				CarbineHeat = 0;
+				FireProjectile();
 			}
 			PlayAnimMontage(ChargeMontage, 1.0f);
 			ChargeAudioComponent->Stop();
@@ -363,6 +379,7 @@ void AFireWarrior_Character::HitByEnemy()
 void AFireWarrior_Character::ChargeFire()
 {
 	CarbineHeat += 8;
+	tempCarbineHeat = CarbineHeat;
 }
 
 
@@ -440,4 +457,42 @@ void AFireWarrior_Character::ResetDodge()
 	canDodge = true;
 	dodgeCounter = 0;
 	GetWorldTimerManager().ClearTimer(DodgeCooldownTimerHandle);
+}
+
+void AFireWarrior_Character::FireProjectile()
+{
+	UWorld* const World = GetWorld();
+	FHitResult* Hit = new FHitResult();
+	FVector Start = FollowCamera->GetComponentLocation();
+	FVector End = (FollowCamera->GetForwardVector() * 5000000) + Start;
+	GetWorld()->LineTraceSingleByChannel(*Hit, Start, End, ECC_Visibility);
+
+	switch (FireMode)
+	{
+	case 0:
+		if (Hit)
+		{
+			AchargedProjectile* carbineChargedProjectile = World->SpawnActor<AchargedProjectile>(AchargedProjectile::StaticClass(), Carbine->GetSocketLocation("ProjectileSocket"), FollowCamera->GetComponentRotation());
+			carbineChargedProjectile->carbineHeat = tempCarbineHeat;
+			//UGameplayStatics::SpawnEmitterAttached(MuzzleParticleSystem, Carbine, FName("ProjectileSocket"));
+		}
+		else
+		{
+			AchargedProjectile* carbineChargedProjectile = World->SpawnActor<AchargedProjectile>(AchargedProjectile::StaticClass(), Carbine->GetSocketLocation("ProjectileSocket"), FollowCamera->GetComponentRotation());
+			carbineChargedProjectile->carbineHeat = tempCarbineHeat;
+		}
+		break;
+	case 1:
+		if (Hit)
+		{
+			AActor* carbineProjectile = World->SpawnActor<AActor>(projectile, Carbine->GetSocketLocation("ProjectileSocket"), FollowCamera->GetComponentRotation());
+			UGameplayStatics::PlaySound2D(Carbine, CarbineShot, 1, 1, 0);
+		}
+		else
+		{
+			AActor* carbineProjectile = World->SpawnActor<AActor>(projectile, Carbine->GetSocketLocation("ProjectileSocket"), FollowCamera->GetComponentRotation());
+			UGameplayStatics::PlaySound2D(Carbine, CarbineShot, 1, 1, 0);
+		}
+		break;
+	}
 }

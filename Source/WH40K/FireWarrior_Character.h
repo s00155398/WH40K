@@ -25,69 +25,69 @@ public:
 	// Sets default values for this character's properties
 	AFireWarrior_Character();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
-		USpringArmComponent*  CameraBoom;
+	USpringArmComponent*  CameraBoom;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
-		UCameraComponent* FollowCamera;
+	UCameraComponent* FollowCamera;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
-		UStaticMeshComponent* Carbine;
+	UStaticMeshComponent* Carbine;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
-		UArrowComponent* AimingArrow;
+	UArrowComponent* AimingArrow;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-		float BaseTurnRate;
+	float BaseTurnRate;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-		float BaseLookUpRate;
+	float BaseLookUpRate;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-		bool SaveAttack;
+	bool SaveAttack;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-		bool IsAttacking;
+	bool IsAttacking;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-		int AttackCount;
+	int AttackCount;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-		bool IsAiming;
+	bool IsAiming;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-		bool IsFiring;
+	bool IsFiring;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-		float CoolDownSpeed;
+	float CoolDownSpeed;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
-		float Health;
+	float Health;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
-		float Damage;
+	float Damage;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
-		bool IsDead;
+	bool IsDead;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Aiming")
-		UCurveFloat *AimTimelineCurve;
+	UCurveFloat *AimTimelineCurve;
 
-		FTimeline AimTimeline;
+	FTimeline AimTimeline;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Aiming")
-		UCurveFloat* OverHeatTimelineCurve;
+	UCurveFloat* OverHeatTimelineCurve;
 
 	FTimeline OverHeatAimTimeline;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
-		float CarbineHeat = 0;
+	float CarbineHeat = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
-		bool IsOverHeating;
+	bool IsOverHeating;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage *FireMontage;
+	UAnimMontage *FireMontage;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage* ChargeMontage;
+	UAnimMontage* ChargeMontage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage* HitMontageOne;
+	UAnimMontage* HitMontageOne;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage* HitMontageTwo;
+	UAnimMontage* HitMontageTwo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage* HitMontageThree;
+	UAnimMontage* HitMontageThree;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
-		UAnimMontage* HitMontageFour;
+	UAnimMontage* HitMontageFour;
 
 	
 	USoundCue* OverheatAudioCue;
@@ -101,7 +101,7 @@ public:
 	FRotator StartRot;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Carbine")
-		int FireMode;
+	int FireMode;
 
 	FTimerHandle FireTimerHandle;
 
@@ -110,10 +110,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	FTimerHandle DodgeCooldownTimerHandle; 
 
-
+	TSubclassOf<class AActor> projectile;
+	TSubclassOf<class AActor> chargedprojectile;
+	USoundCue* CarbineShot;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
-		int HitCount;
+	int HitCount;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	int dodgeFront = 0;
@@ -127,6 +129,9 @@ public:
 	bool canDodge = true;
 	UPROPERTY()
 	int dodgeCounter = 0;
+
+
+	float tempCarbineHeat;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -155,7 +160,7 @@ public:
 	void ComboAttackSave();
 	UFUNCTION()
 	void AimTimelineFunc(float BoomArmLength);
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	UFUNCTION()
 	void FireProjectile();
 	UFUNCTION()
 	void OverHeatTimelineFunc(float Duration);
@@ -168,13 +173,13 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void InitiateCameraShake();
 	UFUNCTION()
-		void leftDodge();
+	void leftDodge();
 	UFUNCTION()
-		void rightDodge();
+	void rightDodge();
 	UFUNCTION()
-		void frontDodge();
+	void frontDodge();
 	UFUNCTION()
-		void backDodge();
+	void backDodge();
 	UFUNCTION()
-		void ResetDodge();
+	void ResetDodge();
 };
