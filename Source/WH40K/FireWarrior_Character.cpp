@@ -5,6 +5,7 @@
 #include "Engine\Classes\Components\AudioComponent.h"
 #include <Runtime/Engine/Classes/Kismet/GameplayStatics.h>
 #include "chargedProjectile.h"
+#include "Particles/ParticleSystemComponent.h"
 // Sets default values
 AFireWarrior_Character::AFireWarrior_Character()
 {
@@ -101,18 +102,27 @@ AFireWarrior_Character::AFireWarrior_Character()
 	HitMontageFour = HitAnimFour.Object;
 
 	Damage = 0.1f;
-
-	static ConstructorHelpers::FObjectFinder<UBlueprint> ProjectileBp(
-		TEXT("Blueprint'/Game/FireCaste/Projectile/Projectile_BP.Projectile_BP'"));
-		if (ProjectileBp.Object) {
-		projectile = (UClass*)ProjectileBp.Object->GeneratedClass;
-		}
 		
-		ConstructorHelpers::FObjectFinder<USoundCue> Shot(TEXT("SoundCue'/Game/Audio/Alliance-AssaultRifle_05-Single_Shot-04_Cue.Alliance-AssaultRifle_05-Single_Shot-04_Cue'"));
-		if (Shot.Object) {
-			CarbineShot = Shot.Object;
-		}
+	ConstructorHelpers::FObjectFinder<USoundCue> Shot(TEXT("SoundCue'/Game/Audio/Alliance-AssaultRifle_05-Single_Shot-04_Cue.Alliance-AssaultRifle_05-Single_Shot-04_Cue'"));
+	if (Shot.Object) {
+		CarbineShot = Shot.Object;
+	}
 
+
+	ConstructorHelpers::FObjectFinder<USoundCue> ChargedShot(TEXT("SoundCue'/Game/Audio/Resistance-AssaultRifle_03-Single_Shot-04_Cue.Resistance-AssaultRifle_03-Single_Shot-04_Cue'"));
+	if (ChargedShot.Object) {
+		chargedCarbineShot = ChargedShot.Object;
+	}
+	
+	ConstructorHelpers::FObjectFinder<UParticleSystem> MuzzleParticle(TEXT("ParticleSystem'/Game/FireCaste/FX/Particles/Abilities/Primary/FX/P_Wraith_Primary_MuzzleFlash.P_Wraith_Primary_MuzzleFlash'"));
+	if (MuzzleParticle.Object) {
+		MuzzleFlashParticle = MuzzleParticle.Object;
+	}
+
+	MuzzleFlashParticleComponent = CreateDefaultSubobject<UParticleSystemComponent>("Muzzle Particle System");
+	MuzzleFlashParticleComponent->AttachToComponent(Carbine, FAttachmentTransformRules::KeepRelativeTransform);
+	MuzzleFlashParticleComponent->SetTemplate(MuzzleFlashParticle);
+	MuzzleFlashParticleComponent->bAutoActivate = false;
 }
 
 // Called when the game starts or when spawned
@@ -472,26 +482,25 @@ void AFireWarrior_Character::FireProjectile()
 	case 0:
 		if (Hit)
 		{
-			AchargedProjectile* carbineChargedProjectile = World->SpawnActor<AchargedProjectile>(AchargedProjectile::StaticClass(), Carbine->GetSocketLocation("ProjectileSocket"), FollowCamera->GetComponentRotation());
-			carbineChargedProjectile->carbineHeat = tempCarbineHeat;
-			//UGameplayStatics::SpawnEmitterAttached(MuzzleParticleSystem, Carbine, FName("ProjectileSocket"));
-		}
-		else
-		{
-			AchargedProjectile* carbineChargedProjectile = World->SpawnActor<AchargedProjectile>(AchargedProjectile::StaticClass(), Carbine->GetSocketLocation("ProjectileSocket"), FollowCamera->GetComponentRotation());
-			carbineChargedProjectile->carbineHeat = tempCarbineHeat;
+			AchargedProjectile* carbineChargedProjectile = NULL;
+			carbineChargedProjectile = World->SpawnActor<AchargedProjectile>(AchargedProjectile::StaticClass(), Carbine->GetSocketLocation("ProjectileSocket"), FollowCamera->GetComponentRotation());
+			if (carbineChargedProjectile)
+			{
+				UGameplayStatics::SpawnEmitterAttached(MuzzleFlashParticle, Carbine, FName("ProjectileSocket"), FVector(0, 0, 0), FRotator(0, 90, 0), FVector(tempCarbineHeat/25));
+				carbineChargedProjectile->carbineHeat = tempCarbineHeat;
+				carbineChargedProjectile->IsCharged = true;
+				UGameplayStatics::PlaySound2D(Carbine, chargedCarbineShot, 1, 1, 0);
+				carbineChargedProjectile->ParticleSystem->SetWorldScale3D(FVector(tempCarbineHeat / 25));
+			}
 		}
 		break;
 	case 1:
 		if (Hit)
 		{
-			AActor* carbineProjectile = World->SpawnActor<AActor>(projectile, Carbine->GetSocketLocation("ProjectileSocket"), FollowCamera->GetComponentRotation());
+			AchargedProjectile* carbineChargedProjectile = NULL;
+			carbineChargedProjectile = World->SpawnActor<AchargedProjectile>(AchargedProjectile::StaticClass(), Carbine->GetSocketLocation("ProjectileSocket"), FollowCamera->GetComponentRotation());
 			UGameplayStatics::PlaySound2D(Carbine, CarbineShot, 1, 1, 0);
-		}
-		else
-		{
-			AActor* carbineProjectile = World->SpawnActor<AActor>(projectile, Carbine->GetSocketLocation("ProjectileSocket"), FollowCamera->GetComponentRotation());
-			UGameplayStatics::PlaySound2D(Carbine, CarbineShot, 1, 1, 0);
+			UGameplayStatics::SpawnEmitterAttached(MuzzleFlashParticle, Carbine, FName("ProjectileSocket"), FVector(0, 0, 0), FRotator(0, 90, 0));
 		}
 		break;
 	}

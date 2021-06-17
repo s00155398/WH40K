@@ -442,3 +442,12 @@ void AOrk_Character::SpawnOrkProps(AOrk_Character* OrkReference)
 
 }
 
+void AOrk_Character::projectileHit(AOrk_Character* OrkReference, float damageInflicted)
+{
+	if (damageInflicted > 40)
+	{
+		OrkReference->IsStunned = true;
+	}
+}
+
+

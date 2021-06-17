@@ -27,6 +27,8 @@ public:
 		UAudioComponent* Audio;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		UParticleSystemComponent* ParticleSystem;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UParticleSystemComponent* ChargedParticleSystem;
 	UPROPERTY(EditAnywhere)
 		UCapsuleComponent* Collision;
 	UPROPERTY(VisibleAnywhere)
@@ -38,7 +40,10 @@ public:
 		float damage = 0;
 
 	UParticleSystem* ParticleTemplate;
+	UParticleSystem* ChargedParticleTemplate;
 	USoundCue* ExplosionCue;
+
+	bool IsCharged = false;
 
 protected:
 	// Called when the game starts or when spawned

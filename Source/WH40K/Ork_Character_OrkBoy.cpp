@@ -10,10 +10,6 @@ AOrk_Character_OrkBoy::AOrk_Character_OrkBoy()
 	WeaponOne = CreateDefaultSubobject<UStaticMeshComponent>(FName("Weapon One"));
 	WeaponTwo = CreateDefaultSubobject<UStaticMeshComponent>(FName("Weapon Two"));
 
-	WeaponOne->OnComponentBeginOverlap.AddDynamic(this, &AOrk_Character_OrkBoy::OnBeginOverlap);
-	WeaponTwo->OnComponentBeginOverlap.AddDynamic(this, &AOrk_Character_OrkBoy::OnBeginOverlap);
-
-	
 
 	ConstructorHelpers::FObjectFinder<UAnimMontage> AttackAnimOne(TEXT("AnimMontage'/Game/ork/Animations/PrimaryAttack_LA_Montage.PrimaryAttack_LA_Montage'"));
 	AttackMontageOne = AttackAnimOne.Object;
@@ -74,21 +70,6 @@ void AOrk_Character_OrkBoy::Tick(float DeltaTime)
 	}
 }
 
-void AOrk_Character_OrkBoy::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	UE_LOG(LogTemp, Warning, TEXT("HIT"));
-	if (OtherActor != NULL && OtherActor->ActorHasTag(TEXT("Player")))
-	{
-		if (IsAttacking)
-		{
-			/*
-			AFireWarrior_Character* PlayerCharacter = Cast<AFireWarrior_Character>(OtherActor);
-			PlayerCharacter->HitByEnemy();
-			IsAttacking = false;
-			*/
-		}
-	}
-}
 
 void AOrk_Character_OrkBoy::AttackInitiated()
 {
@@ -223,4 +204,55 @@ void AOrk_Character_OrkBoy::UpdateHealth(float dps)
 			}
 
 		}
+}
+
+void AOrk_Character_OrkBoy::projectileHit(AOrk_Character* OrkReference, float damageInflicted)
+{
+	Super::projectileHit(this, damageInflicted);
+	Health -= damageInflicted;
+	if (damageInflicted > 11)
+	{
+		if (Health <= 0)
+		{
+			WeaponOne->DetachFromParent();
+			WeaponOne->SetSimulatePhysics(true);
+
+			WeaponTwo->DetachFromParent();
+			WeaponTwo->SetSimulatePhysics(true);
+
+			WeaponOne->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+			WeaponTwo->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+
+			WeaponOne->SetCollisionProfileName(FName("BlockAll"));
+			WeaponTwo->SetCollisionProfileName(FName("BlockAll"));
+			this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			GetMesh()->SetSimulatePhysics(true);
+			GetMesh()->SetCollisionProfileName("Ragdoll");
+			this->GetController()->UnPossess();
+			InitiateDisintegration();
+		}
+	}
+	else
+	{
+		if (Health <= 0)
+		{
+			this->GetController()->UnPossess();
+			WeaponOne->DetachFromParent();
+			WeaponOne->SetSimulatePhysics(true);
+			GetMesh()->SetSimulatePhysics(true);
+			GetMesh()->SetCollisionProfileName("Ragdoll");
+			WeaponTwo->DetachFromParent();
+			WeaponTwo->SetSimulatePhysics(true);
+
+			WeaponOne->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+			WeaponTwo->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+
+			WeaponOne->SetCollisionProfileName(FName("BlockAll"));
+			WeaponTwo->SetCollisionProfileName(FName("BlockAll"));
+
+			this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		}
+
+	}
 }

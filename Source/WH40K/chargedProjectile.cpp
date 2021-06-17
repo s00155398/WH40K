@@ -4,6 +4,8 @@
 #include "chargedProjectile.h"
 #include "Components/AudioComponent.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include <WH40K/Ork_Character.h>
 
 // Sets default values
 AchargedProjectile::AchargedProjectile()
@@ -13,7 +15,7 @@ AchargedProjectile::AchargedProjectile()
 
 	MovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>("Movement Component");
 	MovementComponent->SetUpdatedComponent(Sphere);
-	MovementComponent->InitialSpeed = 9000.0f;
+	MovementComponent->InitialSpeed = 6000.0f;
 	MovementComponent->MaxSpeed = 10000.0f;
 	MovementComponent->bRotationFollowsVelocity = true;
 	MovementComponent->bShouldBounce = true;
@@ -23,10 +25,10 @@ AchargedProjectile::AchargedProjectile()
 	
 	Sphere = CreateDefaultSubobject<UStaticMeshComponent>("Sphere");
 	RootComponent = Sphere;
-
+	
 	RadialForce = CreateDefaultSubobject<URadialForceComponent>("Radial Force");
 	RadialForce->AttachToComponent(Sphere, FAttachmentTransformRules::KeepRelativeTransform);
-
+	
 	ConstructorHelpers::FObjectFinder<USoundCue> Explosion(TEXT("SoundCue'/Game/Audio/Explosion02_Cue.Explosion02_Cue'"));
 	if (Explosion.Object) {
 		ExplosionCue = Explosion.Object;
@@ -41,12 +43,22 @@ AchargedProjectile::AchargedProjectile()
 	if (Particle.Object) {
 		ParticleTemplate = Particle.Object;
 	}
-
+	
 
 	ParticleSystem = CreateDefaultSubobject<UParticleSystemComponent>("Particle System");
 	ParticleSystem->AttachToComponent(Sphere, FAttachmentTransformRules::KeepRelativeTransform);
 	ParticleSystem->SetTemplate(ParticleTemplate);
 
+	ConstructorHelpers::FObjectFinder<UParticleSystem> ChargedShotHit(TEXT("ParticleSystem'/Game/FXVarietyPack/Particles/P_ky_waterBallHit.P_ky_waterBallHit'"));
+	if (ChargedShotHit.Object) {
+		ChargedParticleTemplate = ChargedShotHit.Object;
+	}
+
+
+	ChargedParticleSystem = CreateDefaultSubobject<UParticleSystemComponent>("Charged Particle System");
+	ChargedParticleSystem->AttachToComponent(Sphere, FAttachmentTransformRules::KeepRelativeTransform);
+	ChargedParticleSystem->SetTemplate(ChargedParticleTemplate);
+	ChargedParticleSystem->bAutoActivate = false;
 
 	Collision = CreateDefaultSubobject<UCapsuleComponent>("Collision Component");
 	Collision->AttachToComponent(Sphere, FAttachmentTransformRules::KeepRelativeTransform);
@@ -75,8 +87,6 @@ AchargedProjectile::AchargedProjectile()
 void AchargedProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-	SetActorScale3D(FVector(carbineHeat / 4, carbineHeat / 4, carbineHeat /4));
-	Audio.sound
 }
 
 // Called every frame
@@ -87,11 +97,26 @@ void AchargedProjectile::Tick(float DeltaTime)
 
 void AchargedProjectile::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (!OtherActor->ActorHasTag("Player") || OtherComp )
+	if (!OtherActor->ActorHasTag("Enemy") || OtherComp)
 	{
-		damage = carbineHeat * 2;
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Carbine Heat Value: %f"), carbineHeat));
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Damage Value: %f"), damage));
+		if (IsCharged == true)
+		{
+			UGameplayStatics::SpawnSoundAtLocation(this, Audio->Sound, GetActorLocation());
+			UGameplayStatics::SpawnEmitterAtLocation(this, ChargedParticleTemplate, GetActorLocation(), FRotator(0,0,0), FVector(carbineHeat/20));
+			damage = carbineHeat * 1.5;
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Carbine Heat Value: %f"), carbineHeat));
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Damage Value: %f"), damage));
+		}
+		else
+		{
+			damage = 10;
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Damage Value: %f"), damage));
+		}
+		AOrk_Character* ork = Cast<AOrk_Character>(OtherActor);
+
+		if (ork && ork->Health > 0) {
+			ork->projectileHit(ork, damage);
+		}
 		Destroy();
 	}
 }

@@ -80,8 +80,8 @@ public:
 		void FireShoota(ACharacter* PlayerRef);
 	UFUNCTION(BlueprintCallable)
 		void HitByProjectile(float dps);
-	UFUNCTION()
-		void UpdateHealth(float dps);
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 		void InitiateDisintegration();
+
+	virtual void projectileHit(AOrk_Character* OrkReference, float damageInflicted) override;
 };

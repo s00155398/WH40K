@@ -35,6 +35,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
 	UArrowComponent* AimingArrow;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UParticleSystemComponent* MuzzleFlashParticleComponent;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	float BaseTurnRate;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
@@ -110,9 +113,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	FTimerHandle DodgeCooldownTimerHandle; 
 
-	TSubclassOf<class AActor> projectile;
-	TSubclassOf<class AActor> chargedprojectile;
 	USoundCue* CarbineShot;
+	USoundCue* chargedCarbineShot;
+	UParticleSystem* MuzzleFlashParticle;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat")
 	int HitCount;

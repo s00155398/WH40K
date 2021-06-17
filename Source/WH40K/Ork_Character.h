@@ -161,5 +161,8 @@ public:
 	
 	UFUNCTION()
 	void SpawnOrkProps(AOrk_Character* OrkReference);
+
+	UFUNCTION()
+	virtual void projectileHit(AOrk_Character* OrkReference, float damageInflicted);
 	
 };

@@ -117,43 +117,8 @@ void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 
 void AOrk_Character_ShootaBoy::HitByProjectile(float dps)
 {
-	if (Health > 0)
-	{
-		PlayAnimMontage(HitMontageOne, 1.0f);
-		UpdateHealth(dps);
-	}
-}
-
-void AOrk_Character_ShootaBoy::UpdateHealth(float dps)
-{
-	Health -= dps;
-	if (dps > 11)
-	{
-		if (Health <= 0)
-		{
-			GetMesh()->bNoSkeletonUpdate = true;
-			this->DetachFromControllerPendingDestroy();
-			this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-			this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-			Shoota->DetachFromParent();
-			Shoota->SetSimulatePhysics(true);
-			InitiateDisintegration();
-		}
-	}
-	else
-	{
-		if (Health <= 0)
-		{
-		this->GetController()->UnPossess();
-		this->DetachFromControllerPendingDestroy();
-		this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		GetMesh()->SetSimulatePhysics(true);
-		GetMesh()->SetCollisionProfileName("Ragdoll");
-		this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-		Shoota->DetachFromParent();
-		Shoota->SetSimulatePhysics(true);
-		}
-	}
+	projectileHit(this, dps);
+	PlayAnimMontage(HitMontageOne, 1.0f);
 }
 
 void AOrk_Character_ShootaBoy::ResetFire()
@@ -169,4 +134,40 @@ void AOrk_Character_ShootaBoy::Reload()
 	IsAiming = true;
 	IsReloading = false;
 	GetWorldTimerManager().ClearTimer(ReloadTimerHandle);
+}
+
+void AOrk_Character_ShootaBoy::projectileHit(AOrk_Character* OrkReference, float damageInflicted)
+{
+	Super::projectileHit(this, damageInflicted);
+	Health -= damageInflicted;
+	if (damageInflicted > 11)
+	{
+		if (Health <= 0)
+		{
+			
+			this->GetController()->UnPossess();
+			this->DetachFromControllerPendingDestroy();
+			this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			GetMesh()->SetSimulatePhysics(true);
+			GetMesh()->SetCollisionProfileName("Ragdoll");
+			this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			Shoota->DetachFromParent();
+			Shoota->SetSimulatePhysics(true);
+			InitiateDisintegration();
+		}
+	}
+	else
+	{
+		if (Health <= 0)
+		{
+			this->GetController()->UnPossess();
+			this->DetachFromControllerPendingDestroy();
+			this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			GetMesh()->SetSimulatePhysics(true);
+			GetMesh()->SetCollisionProfileName("Ragdoll");
+			this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			Shoota->DetachFromParent();
+			Shoota->SetSimulatePhysics(true);
+		}
+	}
 }
