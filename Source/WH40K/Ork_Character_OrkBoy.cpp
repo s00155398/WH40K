@@ -133,82 +133,27 @@ void AOrk_Character_OrkBoy::ResetCombo()
 	IsAttacking = false;
 }
 
-void AOrk_Character_OrkBoy::HitByProjectile(float dps)
-{
-	if (Health > 0)
-	{
-		HitCount = FMath::RandRange(0, 3);
-		switch (HitCount)
-		{
-		case 0:
-			PlayAnimMontage(HitMontageOne, 1.0f);
-			break;
-		case 1:
-			PlayAnimMontage(HitMontageTwo, 1.0f);
-			break;
-		case 2:
-			PlayAnimMontage(HitMontageThree, 1.0f);
-			break;
-		case 3:
-			PlayAnimMontage(HitMontageFour, 1.0f);
-			break;
-		}
-		UpdateHealth(dps);
-	}
-}
-
-void AOrk_Character_OrkBoy::UpdateHealth(float dps)
-{
-		Health -= dps;
-		if (dps > 11)
-		{
-			if (Health <= 0)
-			{
-				GetMesh()->bNoSkeletonUpdate = true;
-				WeaponOne->DetachFromParent();
-				WeaponOne->SetSimulatePhysics(true);
-
-				WeaponTwo->DetachFromParent();
-				WeaponTwo->SetSimulatePhysics(true);
-
-				WeaponOne->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-				WeaponTwo->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-
-				WeaponOne->SetCollisionProfileName(FName("BlockAll"));
-				WeaponTwo->SetCollisionProfileName(FName("BlockAll"));
-				this->GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-				this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-				this->GetController()->UnPossess();
-				InitiateDisintegration();
-			}
-		}
-		else
-		{
-			if (Health <= 0)
-			{
-				this->GetController()->UnPossess();
-				WeaponOne->DetachFromParent();
-				WeaponOne->SetSimulatePhysics(true);
-				GetMesh()->SetSimulatePhysics(true);
-				GetMesh()->SetCollisionProfileName("Ragdoll");
-				WeaponTwo->DetachFromParent();
-				WeaponTwo->SetSimulatePhysics(true);
-
-				WeaponOne->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-				WeaponTwo->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-
-				WeaponOne->SetCollisionProfileName(FName("BlockAll"));
-				WeaponTwo->SetCollisionProfileName(FName("BlockAll"));
-
-				this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-			}
-
-		}
-}
-
 void AOrk_Character_OrkBoy::projectileHit(AOrk_Character* OrkReference, float damageInflicted)
 {
 	Super::projectileHit(this, damageInflicted);
+
+	HitCount = FMath::RandRange(0, 3);
+	switch (HitCount)
+	{
+	case 0:
+		PlayAnimMontage(HitMontageOne, 1.0f);
+		break;
+	case 1:
+		PlayAnimMontage(HitMontageTwo, 1.0f);
+		break;
+	case 2:
+		PlayAnimMontage(HitMontageThree, 1.0f);
+		break;
+	case 3:
+		PlayAnimMontage(HitMontageFour, 1.0f);
+		break;
+	}
+
 	Health -= damageInflicted;
 	if (damageInflicted > 11)
 	{

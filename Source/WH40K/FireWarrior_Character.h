@@ -92,6 +92,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 	UAnimMontage* HitMontageFour;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+	UAnimMontage* DodgeForward;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+	UAnimMontage* DodgeBackward;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+	UAnimMontage* DodgeRight;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+	UAnimMontage* DodgeLeft;
 	
 	USoundCue* OverheatAudioCue;
 	UAudioComponent* OverheatAudioComponent;
@@ -121,14 +129,6 @@ public:
 	int HitCount;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-	int dodgeFront = 0;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-	int dodgeBack = 0;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-	int dodgeLeft = 0;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
-	int dodgeRight = 0;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	bool canDodge = true;
 	UPROPERTY()
 	int dodgeCounter = 0;
@@ -157,10 +157,6 @@ public:
 	void ChargeFire();
 	UFUNCTION()
 	void StopFire();
-	UFUNCTION(BlueprintCallable)
-	void ResetCombo();
-	UFUNCTION(BlueprintCallable)
-	void ComboAttackSave();
 	UFUNCTION()
 	void AimTimelineFunc(float BoomArmLength);
 	UFUNCTION()

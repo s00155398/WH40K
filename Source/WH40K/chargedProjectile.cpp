@@ -104,13 +104,10 @@ void AchargedProjectile::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent
 			UGameplayStatics::SpawnSoundAtLocation(this, Audio->Sound, GetActorLocation());
 			UGameplayStatics::SpawnEmitterAtLocation(this, ChargedParticleTemplate, GetActorLocation(), FRotator(0,0,0), FVector(carbineHeat/20));
 			damage = carbineHeat * 1.5;
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Carbine Heat Value: %f"), carbineHeat));
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Damage Value: %f"), damage));
 		}
 		else
 		{
 			damage = 10;
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Damage Value: %f"), damage));
 		}
 		AOrk_Character* ork = Cast<AOrk_Character>(OtherActor);
 

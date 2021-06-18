@@ -78,8 +78,6 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 		void FireShoota(ACharacter* PlayerRef);
-	UFUNCTION(BlueprintCallable)
-		void HitByProjectile(float dps);
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 		void InitiateDisintegration();
 

@@ -34,11 +34,6 @@ public:
 		void ComboAttackSave();
 	UFUNCTION(BlueprintCallable) 
 		void ResetCombo();
-
-	UFUNCTION(BlueprintCallable)
-		void HitByProjectile(float dps);
-	UFUNCTION()
-		void UpdateHealth(float dps);
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 		void InitiateDisintegration();
 	// Called every frame

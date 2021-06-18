@@ -115,12 +115,6 @@ void AOrk_Character_ShootaBoy::FireShoota(ACharacter* PlayerRef)
 		}
 }
 
-void AOrk_Character_ShootaBoy::HitByProjectile(float dps)
-{
-	projectileHit(this, dps);
-	PlayAnimMontage(HitMontageOne, 1.0f);
-}
-
 void AOrk_Character_ShootaBoy::ResetFire()
 {
 	bCanFire = true;
@@ -139,6 +133,7 @@ void AOrk_Character_ShootaBoy::Reload()
 void AOrk_Character_ShootaBoy::projectileHit(AOrk_Character* OrkReference, float damageInflicted)
 {
 	Super::projectileHit(this, damageInflicted);
+	PlayAnimMontage(HitMontageOne, 1.0f);
 	Health -= damageInflicted;
 	if (damageInflicted > 11)
 	{
