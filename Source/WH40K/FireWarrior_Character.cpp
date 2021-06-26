@@ -134,7 +134,7 @@ AFireWarrior_Character::AFireWarrior_Character()
 	DodgeRight = RightDodge.Object;
 
 
-
+	SpawningDrone = false;
 }
 
 // Called when the game starts or when spawned
@@ -340,7 +340,7 @@ void AFireWarrior_Character::HitByEnemy()
 	}
 	else
 	{
-		if (!IsAttacking)
+		if (!IsAttacking && !SpawningDrone)
 		{
 			HitCount = FMath::RandRange(0, 3);
 			switch (HitCount)

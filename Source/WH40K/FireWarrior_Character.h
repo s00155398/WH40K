@@ -135,6 +135,9 @@ public:
 
 
 	float tempCarbineHeat;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Drone")
+		bool SpawningDrone;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

@@ -6,6 +6,7 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include <WH40K/Ork_Character.h>
+#include <Runtime/GameplayTags/Classes/GameplayTagContainer.h>
 
 // Sets default values
 AchargedProjectile::AchargedProjectile()
@@ -22,10 +23,9 @@ AchargedProjectile::AchargedProjectile()
 	MovementComponent->Bounciness = 0.3f;
 	MovementComponent->ProjectileGravityScale = 0.0f;
 
-	
 	Sphere = CreateDefaultSubobject<UStaticMeshComponent>("Sphere");
 	RootComponent = Sphere;
-	
+
 	RadialForce = CreateDefaultSubobject<URadialForceComponent>("Radial Force");
 	RadialForce->AttachToComponent(Sphere, FAttachmentTransformRules::KeepRelativeTransform);
 	
@@ -81,6 +81,7 @@ AchargedProjectile::AchargedProjectile()
 	Collision->BodyInstance.SetResponseToChannel(ECC_PhysicsBody, ECR_Overlap);
 	Collision->BodyInstance.SetResponseToChannel(ECC_Vehicle, ECR_Overlap);
 	Collision->BodyInstance.SetResponseToChannel(ECC_Destructible, ECR_Overlap);
+	
 }
 
 // Called when the game starts or when spawned
@@ -97,7 +98,7 @@ void AchargedProjectile::Tick(float DeltaTime)
 
 void AchargedProjectile::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (!OtherActor->ActorHasTag("Enemy") || OtherComp)
+	if (OtherActor->ActorHasTag("Enemy") || !OtherComp->ComponentHasTag("Shield"))
 	{
 		if (IsCharged == true)
 		{
@@ -108,6 +109,7 @@ void AchargedProjectile::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent
 		else
 		{
 			damage = 10;
+			UGameplayStatics::SpawnEmitterAtLocation(this, ChargedParticleTemplate, GetActorLocation(), FRotator(0, 0, 0), FVector(carbineHeat / 40));
 		}
 		AOrk_Character* ork = Cast<AOrk_Character>(OtherActor);
 
