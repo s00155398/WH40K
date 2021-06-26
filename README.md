@@ -10,7 +10,9 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 
 ## Updates
+[Dodge Animation Update](https://youtu.be/VKN1akaMBoM)
 
+The player character now features dodge roll animations to better visualize the dodge mechanic.
 
 [Dodge & Move Update](https://youtu.be/1ggOAdTtUu4)
 
