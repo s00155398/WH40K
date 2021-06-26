@@ -10,6 +10,10 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 
 ## Updates
+[Shield Drone Update](https://youtu.be/zmSz31q0RMM)
+
+The player character now can summon a shield drone to absorb incoming fire from enemies.
+
 [Dodge Animation Update](https://youtu.be/VKN1akaMBoM)
 
 The player character now features dodge roll animations to better visualize the dodge mechanic.
