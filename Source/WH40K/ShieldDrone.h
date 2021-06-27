@@ -7,7 +7,6 @@
 #include <Runtime/Engine/Classes/GameFramework/SpringArmComponent.h>
 #include "GameFramework/FloatingPawnMovement.h"
 #include "ShieldDrone.generated.h"
-
 UCLASS()
 class WH40K_API AShieldDrone : public APawn
 {
@@ -41,6 +40,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 		USpringArmComponent* SpringArm;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UAudioComponent* ShieldAudioComponent;
 
 protected:
 	// Called when the game starts or when spawned

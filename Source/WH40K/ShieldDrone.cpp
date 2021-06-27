@@ -3,6 +3,8 @@
 
 #include "ShieldDrone.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "Engine\Classes\Components\AudioComponent.h"
+#include "Sound/SoundCue.h"
 // Sets default values
 AShieldDrone::AShieldDrone()
 {
@@ -29,6 +31,11 @@ AShieldDrone::AShieldDrone()
 
 	ShieldCollision = CreateDefaultSubobject<USphereComponent>("Shield Collision");
 	ShieldCollision->AttachToComponent(DroneMesh, FAttachmentTransformRules::KeepRelativeTransform);
+
+	ShieldAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("Shield Audio Component"));
+	ShieldAudioComponent->bAutoActivate = false;
+
+	ShieldAudioComponent->AttachTo(RootComponent);
 
 }
 
