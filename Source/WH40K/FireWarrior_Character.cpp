@@ -201,12 +201,9 @@ void AFireWarrior_Character::SetupPlayerInputComponent(UInputComponent* PlayerIn
 	InputComponent->BindAction("Fire", IE_Pressed, this, &AFireWarrior_Character::CheckFire);
 	InputComponent->BindAction("Fire", IE_Released, this, &AFireWarrior_Character::StopFire);
 
-	InputComponent->BindAction("DodgeForward", IE_Pressed, this, &AFireWarrior_Character::frontDodge);
-	InputComponent->BindAction("DodgeBack", IE_Pressed, this, &AFireWarrior_Character::backDodge);
-	InputComponent->BindAction("DodgeRight", IE_Pressed, this, &AFireWarrior_Character::rightDodge);
-	InputComponent->BindAction("DodgeLeft", IE_Pressed, this, &AFireWarrior_Character::leftDodge);
-
 	InputComponent->BindAction("ChangeFiringMode", IE_Pressed, this, &AFireWarrior_Character::ChangeFireMode);
+
+	InputComponent->BindAction("dodgeRoll", IE_Pressed, this, &AFireWarrior_Character::dodgeRoll);
 }
 
 void AFireWarrior_Character::Aim()
@@ -370,89 +367,82 @@ void AFireWarrior_Character::ChargeFire()
 	tempCarbineHeat = CarbineHeat;
 }
 
-
-
-void AFireWarrior_Character::frontDodge()
-{
-	if (UGameplayStatics::GetPlayerController(GetWorld(), 0)->IsInputKeyDown(EKeys::LeftShift) && !IsAiming && canDodge)
-	{
-			FVector forwardDodgeVelocity = { FollowCamera->GetForwardVector().X * 2000,FollowCamera->GetForwardVector().Y * 2000, 250 };
-			if (CanJump())
-			{
-				dodgeCounter++;
-				LaunchCharacter(forwardDodgeVelocity, false, false);
-				SetActorRotation(FRotator(0, FollowCamera->GetComponentRotation().Yaw, 0));
-				PlayAnimMontage(DodgeForward, 1.0f);
-				if (dodgeCounter == 3)
-				{
-					GetWorldTimerManager().SetTimer(DodgeCooldownTimerHandle, this, &AFireWarrior_Character::ResetDodge, 2.0f, false);
-					canDodge = false;
-				}
-			}
-	}
-}
-void AFireWarrior_Character::backDodge()
-{
-	if (UGameplayStatics::GetPlayerController(GetWorld(), 0)->IsInputKeyDown(EKeys::LeftShift) && !IsAiming && canDodge)
-	{
-			FVector backDodgeVelocity = { -FollowCamera->GetForwardVector().X * 2000,-FollowCamera->GetForwardVector().Y * 2000, 250 };
-			if (CanJump())
-			{
-				dodgeCounter++;
-				LaunchCharacter(backDodgeVelocity, false, false);
-				SetActorRotation(FRotator(0, FollowCamera->GetComponentRotation().Yaw, 0));
-				PlayAnimMontage(DodgeBackward, 1.0f);
-				if (dodgeCounter == 3)
-				{
-					GetWorldTimerManager().SetTimer(DodgeCooldownTimerHandle, this, &AFireWarrior_Character::ResetDodge, 2.0f, false);
-					canDodge = false;
-				}
-			}
-	}
-}
-void AFireWarrior_Character::rightDodge()
-{
-	 if (UGameplayStatics::GetPlayerController(GetWorld(), 0)->IsInputKeyDown(EKeys::LeftShift) && !IsAiming && canDodge)
-	{
-			 FVector rightDodgeVelocity = { FollowCamera->GetRightVector().X * 2000,FollowCamera->GetRightVector().Y * 2000, 250 };
-			 if (CanJump())
-			 {
-				 dodgeCounter++;
-				 LaunchCharacter(rightDodgeVelocity, false, false);
-				 SetActorRotation(FRotator(0, FollowCamera->GetComponentRotation().Yaw, 0));
-				 PlayAnimMontage(DodgeRight, 1.0f);
-				 if (dodgeCounter == 3)
-				 {
-					 GetWorldTimerManager().SetTimer(DodgeCooldownTimerHandle, this, &AFireWarrior_Character::ResetDodge, 2.0f, false);
-					 canDodge = false;
-				 }
-			 }	 
-	}
-}
-void AFireWarrior_Character::leftDodge()
-{
-	if (UGameplayStatics::GetPlayerController(GetWorld(), 0)->IsInputKeyDown(EKeys::LeftShift) && !IsAiming && canDodge)
-	{
-			FVector leftDodgeVelocity = { -FollowCamera->GetRightVector().X * 2000,-FollowCamera->GetRightVector().Y * 2000, 250 };
-			if (CanJump())
-			{
-				dodgeCounter++;
-				LaunchCharacter(leftDodgeVelocity, false, false);
-				SetActorRotation(FRotator(0, FollowCamera->GetComponentRotation().Yaw, 0));
-				PlayAnimMontage(DodgeLeft, 1.0f);
-				if (dodgeCounter == 3)
-				{
-					GetWorldTimerManager().SetTimer(DodgeCooldownTimerHandle, this, &AFireWarrior_Character::ResetDodge, 2.0f, false);
-					canDodge = false;
-				}
-			}
-	}
-}
 void AFireWarrior_Character::ResetDodge()
 {
 	canDodge = true;
 	dodgeCounter = 0;
 	GetWorldTimerManager().ClearTimer(DodgeCooldownTimerHandle);
+}
+
+void AFireWarrior_Character::dodgeRoll()
+{
+	if (UGameplayStatics::GetPlayerController(GetWorld(), 0)->IsInputKeyDown(EKeys::W) && !IsAiming && canDodge)
+	{
+		FVector forwardDodgeVelocity = { FollowCamera->GetForwardVector().X * 2000,FollowCamera->GetForwardVector().Y * 2000, 250 };
+		if (CanJump())
+		{
+			dodgeCounter++;
+			LaunchCharacter(forwardDodgeVelocity, false, false);
+			SetActorRotation(FRotator(0, FollowCamera->GetComponentRotation().Yaw, 0));
+			PlayAnimMontage(DodgeForward, 1.0f);
+			if (dodgeCounter == 3)
+			{
+				GetWorldTimerManager().SetTimer(DodgeCooldownTimerHandle, this, &AFireWarrior_Character::ResetDodge, 2.0f, false);
+				canDodge = false;
+			}
+		}
+	}
+
+	else if (UGameplayStatics::GetPlayerController(GetWorld(), 0)->IsInputKeyDown(EKeys::S) && !IsAiming && canDodge )
+	{
+		FVector backDodgeVelocity = { -FollowCamera->GetForwardVector().X * 2000,-FollowCamera->GetForwardVector().Y * 2000, 250 };
+		if (CanJump())
+		{
+			dodgeCounter++;
+			LaunchCharacter(backDodgeVelocity, false, false);
+			SetActorRotation(FRotator(0, FollowCamera->GetComponentRotation().Yaw, 0));
+			PlayAnimMontage(DodgeBackward, 1.0f);
+			if (dodgeCounter == 3)
+			{
+				GetWorldTimerManager().SetTimer(DodgeCooldownTimerHandle, this, &AFireWarrior_Character::ResetDodge, 2.0f, false);
+				canDodge = false;
+			}
+		}
+	}
+
+	else if (UGameplayStatics::GetPlayerController(GetWorld(), 0)->IsInputKeyDown(EKeys::D) && !IsAiming && canDodge )
+	{
+		FVector rightDodgeVelocity = { FollowCamera->GetRightVector().X * 2000,FollowCamera->GetRightVector().Y * 2000, 250 };
+		if (CanJump())
+		{
+			dodgeCounter++;
+			LaunchCharacter(rightDodgeVelocity, false, false);
+			SetActorRotation(FRotator(0, FollowCamera->GetComponentRotation().Yaw, 0));
+			PlayAnimMontage(DodgeRight, 1.0f);
+			if (dodgeCounter == 3)
+			{
+				GetWorldTimerManager().SetTimer(DodgeCooldownTimerHandle, this, &AFireWarrior_Character::ResetDodge, 2.0f, false);
+				canDodge = false;
+			}
+		}
+	}
+
+	else if (UGameplayStatics::GetPlayerController(GetWorld(), 0)->IsInputKeyDown(EKeys::A) && !IsAiming && canDodge )
+	{
+		FVector leftDodgeVelocity = { -FollowCamera->GetRightVector().X * 2000,-FollowCamera->GetRightVector().Y * 2000, 250 };
+		if (CanJump())
+		{
+			dodgeCounter++;
+			LaunchCharacter(leftDodgeVelocity, false, false);
+			SetActorRotation(FRotator(0, FollowCamera->GetComponentRotation().Yaw, 0));
+			PlayAnimMontage(DodgeLeft, 1.0f);
+			if (dodgeCounter == 3)
+			{
+				GetWorldTimerManager().SetTimer(DodgeCooldownTimerHandle, this, &AFireWarrior_Character::ResetDodge, 2.0f, false);
+				canDodge = false;
+			}
+		}
+	}
 }
 
 void AFireWarrior_Character::FireProjectile()

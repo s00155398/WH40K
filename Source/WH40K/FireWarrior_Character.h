@@ -175,13 +175,7 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void InitiateCameraShake();
 	UFUNCTION()
-	void leftDodge();
-	UFUNCTION()
-	void rightDodge();
-	UFUNCTION()
-	void frontDodge();
-	UFUNCTION()
-	void backDodge();
-	UFUNCTION()
 	void ResetDodge();
+	UFUNCTION()
+	void dodgeRoll();
 };
