@@ -149,6 +149,7 @@ void AOrk_Character_ShootaBoy::projectileHit(AOrk_Character* OrkReference, float
 			Shoota->DetachFromParent();
 			Shoota->SetSimulatePhysics(true);
 			InitiateDisintegration();
+			SetLifeSpan(5.0f);
 		}
 	}
 	else
@@ -163,6 +164,7 @@ void AOrk_Character_ShootaBoy::projectileHit(AOrk_Character* OrkReference, float
 			this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 			Shoota->DetachFromParent();
 			Shoota->SetSimulatePhysics(true);
+			SetLifeSpan(20.0f);
 		}
 	}
 }

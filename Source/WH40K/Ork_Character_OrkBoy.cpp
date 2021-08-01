@@ -176,6 +176,7 @@ void AOrk_Character_OrkBoy::projectileHit(AOrk_Character* OrkReference, float da
 			GetMesh()->SetCollisionProfileName("Ragdoll");
 			this->GetController()->UnPossess();
 			InitiateDisintegration();
+			SetLifeSpan(2.0f);
 		}
 	}
 	else
@@ -197,6 +198,7 @@ void AOrk_Character_OrkBoy::projectileHit(AOrk_Character* OrkReference, float da
 			WeaponTwo->SetCollisionProfileName(FName("BlockAll"));
 
 			this->GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			SetLifeSpan(20.0f);
 		}
 
 	}

@@ -158,6 +158,13 @@ void AFireWarrior_Character::Tick(float DeltaTime)
 		OverHeatAimTimeline.TickTimeline(DeltaTime);
 	}
 
+	if (IsAiming) {
+		GetCharacterMovement()->MaxWalkSpeed = 300;
+	}
+	else {
+		GetCharacterMovement()->MaxWalkSpeed = 600;
+	}
+
 	if (IsOverHeating)
 	{
 		CoolDownSpeed = 0.9f;
@@ -356,7 +363,7 @@ void AFireWarrior_Character::HitByEnemy()
 				break;
 			}
 		}
-		Health -= 10;
+		Health -= 3;
 	}
 }
 
