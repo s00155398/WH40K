@@ -10,6 +10,10 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 
 ## Updates
+[Basic level Update](https://youtu.be/rrgwVrLWrJs)
+
+A level has been put together to allow the player to use all the features at their disposal and survive against a never ending enemy.
+
 [Shield Drone Update](https://youtu.be/zmSz31q0RMM)
 
 The player character now can summon a shield drone to absorb incoming fire from enemies.
