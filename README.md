@@ -10,103 +10,253 @@ This Unreal Engine4 project contains a player controlled third-person character.
 
 
 ## Updates
-[Basic level Update](https://youtu.be/rrgwVrLWrJs)
+<p align="center">
+Basic Level Showcase
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rrgwVrLWrJs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 A level has been put together to allow the player to use all the features at their disposal and survive against a never ending enemy.
 
-[Shield Drone Update](https://youtu.be/zmSz31q0RMM)
+<p align="center">
+Shield Drone Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zmSz31q0RMM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 The player character now can summon a shield drone to absorb incoming fire from enemies.
 
-[Dodge Animation Update](https://youtu.be/VKN1akaMBoM)
+<p align="center">
+Dodge Animation Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VKN1akaMBoM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 The player character now features dodge roll animations to better visualize the dodge mechanic.
 
-[Dodge & Move Update](https://youtu.be/1ggOAdTtUu4)
+<p align="center">
+Dodge & Move Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1ggOAdTtUu4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 The player can now utilize a dash function to help evade the orks, the shoota-boys now will try to reposition around the player once they begin reloading.
 
-[Ork Ragdoll Update](https://youtu.be/2Ol3_iVXmWA)
+<p align="center">
+Ork Ragdoll Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2Ol3_iVXmWA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 Orks will now ragdoll when killed by a non charged pulse carbine shot, instead a charged shot will be required to disintegrate them.
 
-[Ork Stun Update](https://youtu.be/zK2pNgIYmNo)
+<p align="center">
+Ork Stun Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zK2pNgIYmNo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 The player character now can stun the orks using a suffieciently charged pulse carbine shot.
 
-[Fire Warrior Secondary fire mode Update](https://youtu.be/WgpE951Mr_88)
+<p align="center">
+Fire Warrior Secondary fire mode Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WgpE951Mr_8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 The player character now can utilize a charging blast attack with the pulse carbine. Choppa boys now also have new primary animation sets.
 
-[Ork prop disintegration Update](https://youtu.be/Uui3X5A1oo8)
+<p align="center">
+Ork prop disintegration Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Uui3X5A1oo8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 Ork props now disintegrate with the Ork at death.
 
-[Ork Accuracy Update](https://youtu.be/U4kb10TQ70w)
+<p align="center">
+Ork Accuracy Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/U4kb10TQ70w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 Ork shoota boys now have inaccurate fire.
 
-[Ork Prop System](https://youtu.be/d5wiyGBt3Vw)
+<p align="center">
+Ork Prop System
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/d5wiyGBt3Vw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 Orks now have props which are assigned randomly at runtime.
 
-[Player Death & Detour Ai Update](https://youtu.be/nNUuQo4sFkM)
+<p align="center">
+Player Death & Detour Ai Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nNUuQo4sFkM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 Player character now enters a death state once their health reaches zero, Ork NPC Ai controllers have been reparented to Detour Ai Controller Class to allow for smoother navigation.
 
-[Shoota-Boy Death & Particle Update](https://youtu.be/fp0399UB5zU)
+<p align="center">
+Shoota-Boy Death & Particle Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fp0399UB5zU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 Shoota-Boy now has a death state along with new particle systems for this state and firing its weapon.
 
-[Shoota-Boy Update](https://youtu.be/J0ffOyMSYIo)
+<p align="center">
+Shoota-Boy Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/J0ffOyMSYIo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 New Ork NPC character added, with ranged weapon. WIP
 
-[Ork Disintegration Update](https://youtu.be/d9TjetxjR7U)
+<p align="center">
+Ork Disintegration Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/d9TjetxjR7U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 The Ork character now upon death has a chance to disintegrate.
 
-[Ork Detection and Reaction Update](https://youtu.be/nmrP726CXhM)
+<p align="center">
+Ork Detection and Reaction Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nmrP726CXhM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 The ork character now has some basic awareness which includes Patrolling, Detection and Attacking behaviours. Camera shakes added to player being hit and firing their weapon respectively. As well as hit reaction animations added to both the player character and the ork character.
 
-[Ork Update](https://youtu.be/pqNLTIfLGpw0)
+<p align="center">
+Ork Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pqNLTIfLGpw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 New Ork added with initially basic animations, WIP.
 
-[Firewarrior Disintegration Update](https://youtu.be/3qsPk76Hqt0)
+<p align="center">
+Disintegration Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3qsPk76Hqt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 New Disintegration Material function added.
 
-[Firewarrior Firing Mode Update](https://youtu.be/pK0db8ZnNM8)
+<p align="center">
+Firing Mode Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pK0db8ZnNM8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 WIP firing modes added to the pulse carbine to allow semi and full auto firing.
 
-[Firewarrior Overheating Carbine Update](https://youtu.be/fhVUdq7pqh4)
+<p align="center">
+Overheating Carbine Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fhVUdq7pqh4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 Displaying the functionality of the overheating Carbine.
 
-[Firewarrior Particle System Update](https://www.youtube.com/watch?v=piyJGVVz_1g)
+<p align="center">
+Particle System Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/piyJGVVz_1g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 Showcasing the newly added and changed particle systems used for the Carbine and its live ammunition.
 
-[Firewarrior Crosshair & Projectile Update](https://www.youtube.com/watch?v=8rxM2nxBqzQ&feature=youtu.be)
+<p align="center">
+Crosshair & Projectile Update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8rxM2nxBqzQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 Players crosshair has been replaced with a dynamic set that changes based on player speed at the moment. The projectile is now highly accurate being constrained to  the crosshairs location.
 
-[Firewarrior animation & aiming update](https://www.youtube.com/watch?v=InKMYaX0KO4&feature=youtu.be)
+<p align="center">
+Animation & aiming update
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/InKMYaX0KO4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 The firewarrior is now using retargeted animations from the paragon assets available from the Unreal Store, Aiming has also been  tightened  up to allow for more accurate fire.
 
-[Tau FireWarrior Enemy Interaction](https://www.youtube.com/watch?v=-QT0zYkL0tU&feature=youtu.be)
+<p align="center">
+Enemy Interaction
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-QT0zYkL0tU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 Showing the Ai enemies reacting to the player character and giving chase when the player is sighted.
 
-[Tau FireWarrior AimOffset](https://www.youtube.com/watch?v=fo22MS3_BgI)
+<p align="center">
+FireWarrior AimOffset
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fo22MS3_BgI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 Currently the Fire Warrior has an Aim Offset implemented allowing it to rotate and follow the players view.
 
-[Tau FireWarrior IK hand attachment](https://www.youtube.com/watch?v=AeFQHfd2CSk)
+<p align="center">
+Inverse Kinematic Hand Attachment
+</p>
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AeFQHfd2CSk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
 
 IK Setup to allow the Firewarriors left hand to remain in the grip of the Pulse Carbine and for a realistic posuture to remain without any deformations of the limbs.
 
